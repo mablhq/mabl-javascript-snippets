@@ -4,7 +4,7 @@
  
  ## mabl snippets
  
-The examples included in the mabl snippets are examples of any of the basic functionalities that would be generally useful to anyone using mabl to automate their testing. These snippets will be updated if the mabl support team notices a pattern of interest in particular JavaScript functionalities that are not yet included in this folder.
+The examples included in the mabl snippets are examples of special circumstances or advanced features that would be useful to anyone using mabl to automate their testing. These snippets will be updated if the mabl support team notices a pattern of interest in particular JavaScript functionalities that are not yet included in this folder.
  
  ## user snippets
  
