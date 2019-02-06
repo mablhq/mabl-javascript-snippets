@@ -6,5 +6,7 @@ In order to contribute, the code you submit must include the entire function pro
 
 See [here](https://github.com/EdgarJoelM/mabl-JavaScript-snippets/blob/master/user%20snippets/user%20example.js) for an example of what should be submitted for a pull request.
 
-(add steps indicating exactly how to create and submit a pull request).
+If you would like more information on how to do so, see [here](https://help.github.com/articles/creating-a-pull-request/).
+
+
 
