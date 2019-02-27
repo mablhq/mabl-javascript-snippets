@@ -11,7 +11,7 @@ function mablJavaScriptStep(mablInputs, callback) {
   let element = document.querySelector('CSS selector of element');
   
   // True scrolls to the top of the element, false scrolls to the bottom
-  element.scrollIntoView(true);
+  element.scrollIntoView(false);
 
   callback('Done');
 }
