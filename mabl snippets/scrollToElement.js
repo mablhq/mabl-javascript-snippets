@@ -6,12 +6,23 @@
  */
 function mablJavaScriptStep(mablInputs, callback) {
 
+let result = '';
  
-  // grab the element
-  let element = document.querySelector('CSS selector of element');
-  
-  // True scrolls to the top of the element, false scrolls to the bottom
-  element.scrollIntoView(false);
+// get element location by passing it a Journey parameter named rowID
+let element = document.querySelector('CSS selector' + mablInputs.variables.user.rowID);
 
-  callback('Done');
+if (element !== null) {
+ 
+// false will scroll to the bottom of the element whereas true will scroll to the top
+element.scrollIntoView(false);
+ 
+result = 'Scrolled element into view';
 }
+ 
+else {
+// If element is not found throw an error
+throw Error('Cannot locate the element');
+}
+
+callback(result);
+ 
