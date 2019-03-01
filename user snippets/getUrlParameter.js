@@ -8,7 +8,7 @@ function mablJavaScriptStep(mablInputs, callback) {
 
   let url_string = document.URL; // gets the current URL
   let url = new URL(url_string);
-  let Id = url.searchParams.get("Id");// give the paramter to retrieve
-  callback(Id);
+  let value = url.searchParams.get(mablInputs.variables.user.queryParamName);
+  callback(value);
   
 }
