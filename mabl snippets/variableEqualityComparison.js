@@ -12,21 +12,16 @@ function mablJavaScriptStep(mablInputs, callback) {
     // variable 2 to use in comparison
     let var2 = mablInputs.variables.user.var2; 
 
-    if (var1 === null || var2 === null) {
+    // double Equal sign will check to see if these variables are null or undefined
+    if (var1 == null || var2 == null) {
         throw new Error('One or both of these variables do not exist');
     }
-    
-    // resulting variable that will tell you if the two arguments are equal
-    var result = 'not equal';
-
-    // comparison
+  
+    // comparison taking place, if not equal, throw an error
     if (var1 === var2) {
-        result = 'equal';
+        callback('Equal');
     }
     else {
         throw new Error("These arguments are not equal")
     }
-    
-    // see the result through use of the callback function
-    callback(result);
   }
