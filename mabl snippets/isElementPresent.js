@@ -13,9 +13,14 @@ function mablJavaScriptStep(mablInputs, callback) {
     
     // conditional statement to assure that the element is present, as well as
     // assuring the display does not equal 'none'
-    if (element && element.style.display !== 'none') {
-      callback('Element Present');
-    } else {
-      throw Error('Element Not Present');
+    if (element) {
+        const style = window.getComputedStyle(element);
+        if (style && style.display !== 'none' && style.visibility !== 'collapse' && style.visibility !== 'hidden') {
+             callback('Element Present');
+        } else {
+        throw Error('Element Not Visible');
+        }
+     } else {
+        throw Error('Element Not Present');
     }
   }
