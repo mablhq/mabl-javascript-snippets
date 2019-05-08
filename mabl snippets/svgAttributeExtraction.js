@@ -10,10 +10,17 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Can be used to target a div element by class name, id, etc. Replace element with your desired element.
     const element = document.querySelector('.element');
     
+    if (element) {
+        
     // Looks inside the above element for svg then g then path. Replace with desired path.
     const svgElement = element.querySelector('svg g path');
 
     // gets the style attribute that contains the color in rgb format. Can be replaced with any attribute.
     callback(svgElement.getAttribute('style'));
-
+        
+    } else {
+        
+        // throw an error if the element is null
+        throw Error('Element cannot be found');
+    }
 }
