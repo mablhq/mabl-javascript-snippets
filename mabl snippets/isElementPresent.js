@@ -19,7 +19,7 @@ function mablJavaScriptStep(mablInputs, callback) {
   // check display and visibility values to determine if element is present. Can replace this with "or" statements
   // in between, or even get rid of certain CSS computed style checks to match your application's implementation
   const style = getComputedStyle(element);
-  if (style && style.display == 'none' && style.visibility == 'collapse' && style.visibility == 'hidden') {
+  if (style && (style.display === 'none' || style.visibility === 'collapse' || style.visibility === 'hidden')) {
     throw Error('Element Not Visible');
   }
 
