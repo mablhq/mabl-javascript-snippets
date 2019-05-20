@@ -13,14 +13,11 @@ function mablJavaScriptStep(mablInputs, callback) {
     // check to see if the element exists before interaction
     if (!element) {
         throw Error('Element was not found'); 
-    } else {
+    } 
     
     // Looks inside the above element for svg then g then path. Replace with desired path.
     const svgElement = element.querySelector('svg g path');
 
     // gets the style attribute that contains the color in rgb format. Can be replaced with any attribute.
     callback(svgElement.getAttribute('style'));
-       
-    }
-
 }
