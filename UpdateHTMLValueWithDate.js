@@ -32,9 +32,10 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Returns a string in the format YYYY-MM-DD
     var updatedDate = year + '-' + month + "-" + day;
 
-    // Locates the field using the ID
-    let paymentDate = document.querySelector('#PaymentStartDate');
+    // Locates the field using the corresponding CSS selector
+    let paymentDate = document.querySelector('REPLACE_WITH_CSS_SELECTOR');
 
+    // Throws an error if the element is null or undefined
     if (!paymentDate) {
       throw Error("Element cannot be found");
     }
