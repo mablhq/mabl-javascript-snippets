@@ -33,17 +33,17 @@ function mablJavaScriptStep(mablInputs, callback) {
     var updatedDate = year + '-' + month + "-" + day;
 
     // Locates the field using the corresponding CSS selector
-    let paymentDate = document.querySelector('REPLACE_WITH_CSS_SELECTOR');
+    let dateField = document.querySelector('REPLACE_WITH_CSS_SELECTOR');
 
     // Throws an error if the element is null or undefined
-    if (!paymentDate) {
+    if (!dateField) {
       throw Error("Element cannot be found");
     }
 
     // Updates the value of the element with the new date
-    paymentDate.setAttribute('value', updatedDate);
-    paymentDate.value = updatedDate;
-    paymentDate.dispatchEvent(new Event("change"));
+    dateField.setAttribute('value', updatedDate);
+    dateField.value = updatedDate;
+    dateField.dispatchEvent(new Event("change"));
 
     callback(true);
 }
