@@ -1,5 +1,4 @@
 /**
- * Creating a data/time variable. 
  * @param {object} - mablInputs Object containing input
  *                   variables (mablInputs.variables.user)
  * @param {function} callback - The callback function
