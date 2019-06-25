@@ -15,7 +15,7 @@
 function mablJavaScriptStep(mablInputs, callback) {
   // document.defaultView returns the window object in your browser
   // document.defaultView.performance.getEntries() returns a list of all network calls made (works in latest Chrome and Firefox)
-  const networkCalls = document.defaultView.performance.getEntries();
+  var networkCalls = document.defaultView.performance.getEntries();
 
   // code for checking network calls here
 
