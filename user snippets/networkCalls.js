@@ -13,7 +13,7 @@
  */
 
 function mablJavaScriptStep(mablInputs, callback) {
-  // document.defaultView returns the window object in your browser
+  // document.defaultView returns the window object in your browser. mabl gives you access to document, but not window
   var window = document.defaultView;
   // document.defaultView.performance.getEntries() returns a list of all network calls made (works in latest Chrome and Firefox)
   var networkCalls = window.performance.getEntries();
