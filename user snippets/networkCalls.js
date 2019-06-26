@@ -1,5 +1,7 @@
 /**
- * Run a small snippet of JavaScript during a mabl flow/journey
+ * Demonstrates how to access the window object and how to access all network calls on a page visit via javascript.
+ * (NOTE: document.defaultView should work for Chrome, Firefox, and IE11,
+ * but document.defaultView.performance.getEntries only works for Chrome and Firefox)
  * 
  * @param {object} mablInputs - Object containing mabl inputs such as variables (mablInputs.variables). 
  *                              Use mablInputs.variables.user for user defined variables
