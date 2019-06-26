@@ -1,8 +1,6 @@
 /**
- * Run a small snippet of JavaScript during a mabl flow/journey
- * @param {object} - mablInputs Object containing input
- *                   variables (mablInputs.variables.user)
- * @param {function} callback - The callback function
+ * Asserts if a checkbox attribute has been selected, 
+ * and throws the corresponding error otherwise
  */
 function mablJavaScriptStep(mablInputs, callback) {
 
