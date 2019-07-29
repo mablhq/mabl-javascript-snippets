@@ -1,0 +1,14 @@
+/**
+ * JS snippet to get number of child elements
+ * @param {object} - mablInputs Object containing input
+ *                   variables (mablInputs.variables.user)
+ * @param {function} callback - The callback function
+ */
+ 
+function mablJavaScriptStep(mablInputs, callback) {
+
+  // Gets the page element by ID and counts the number of direct child elements
+  let xpath_result = document.getElementById("REPLACE_WITH_ID").childElementCount;
+  callback(xpath_result)
+    
+}
