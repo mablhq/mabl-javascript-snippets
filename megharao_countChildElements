@@ -7,8 +7,17 @@
  
 function mablJavaScriptStep(mablInputs, callback) {
 
-  // Gets the page element by ID and counts the number of direct child elements
-  let xpath_result = document.getElementById("REPLACE_WITH_ID").childElementCount;
-  callback(xpath_result)
+  // Gets the page element by ID
+  let id_result = document.getElementById("REPLACE_WITH_ID");
+
+  // check that the element is not null or undefined
+  if (!id_result) {
+    throw Error('Element cannot be found');
+  }
+  
+  //counts the number of child elements
+  let id_childCount = id_result.childElementCount;
+  
+  callback(id_childCount)
     
 }
