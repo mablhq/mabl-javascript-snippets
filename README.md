@@ -1,4 +1,4 @@
-# mabl-JavaScript-snippets
+# mabl Javascript Snippets
 
  This repository functions as the site where users can view and take JavaScript examples that can be used in their own mabl testing. Users can also contribute to this repository with an example of their own JavaScript code they used in mabl trainer.
  
