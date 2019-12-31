@@ -64,6 +64,6 @@ function mablJavaScriptStep(mablInputs, callback) {
   // Ex: clickCanvasAt(250, 750);
 
   // Returns a string to the mabl test with the x & y values.
-  console.log("X: " + x + ", Y: " + y);
+  callback("X: " + x + ", Y: " + y);
 }
 
