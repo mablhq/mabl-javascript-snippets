@@ -42,9 +42,12 @@ function mablJavaScriptStep(mablInputs, callback) {
     }
     
     // Get a start date from an existing mabl variable named "startDate" and parses it into a Date object
+    // If no startDate is provided, use todays date
     let startDate = new Date(mablInputs.variables.user.startDate);
+    startDate = (startDate === undefined ? new Date() : startDate);
+  
     // Get a number of days to adjust the the date from an existing mabl variable named "dateAdjustment" and converts it from a string to an number
-    let dateAdjustment = parstInt(mablInputs.variables.user.dateAdjustment);
+    let dateAdjustment = parseInt(mablInputs.variables.user.dateAdjustment);
     // Adjusts the startDate by the dateAdjustment and saves it as the newDate
     let newDate = startDate.addDays(dateAdjustment);
 
