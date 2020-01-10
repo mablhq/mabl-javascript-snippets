@@ -2,6 +2,7 @@
 
 /**
  * Creates a date formatted month/day/year from a start date and a number of days to adjust that by.
+ *      startDate defaults to today if no value is provided.
  * 
  * REQUIRED VARIABLES:
  *      - startDate: A date to start from
