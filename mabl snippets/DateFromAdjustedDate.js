@@ -2,10 +2,11 @@
 
 /**
  * Creates a date formatted month/day/year from a start date and a number of days to adjust that by.
+ *      startDate defaults to today if no value is provided.
  * 
- * REQUIRED VARIABLES:
- *      - startDate: A date to start from
- *      - dateAdjustment: A whole number of days to add to that date
+ * VARIABLES:
+ *      - startDate (optional): A date to start from
+ *      - dateAdjustment (required): A whole number of days to add to that date
  * 
  * @param {object} mablInputs - Object containing mabl inputs such as variables (mablInputs.variables). 
  *                              Use mablInputs.variables.user for user defined variables
@@ -42,9 +43,12 @@ function mablJavaScriptStep(mablInputs, callback) {
     }
     
     // Get a start date from an existing mabl variable named "startDate" and parses it into a Date object
+    // If no startDate is provided, use todays date
     let startDate = new Date(mablInputs.variables.user.startDate);
+    startDate = (startDate === undefined ? new Date() : startDate);
+  
     // Get a number of days to adjust the the date from an existing mabl variable named "dateAdjustment" and converts it from a string to an number
-    let dateAdjustment = parstInt(mablInputs.variables.user.dateAdjustment);
+    let dateAdjustment = parseInt(mablInputs.variables.user.dateAdjustment);
     // Adjusts the startDate by the dateAdjustment and saves it as the newDate
     let newDate = startDate.addDays(dateAdjustment);
 
