@@ -11,14 +11,20 @@
  */
 function mablJavaScriptStep(mablInputs, callback) {
     // Get the value of the mabl variable "list"
-    let list = mablInputs.variables.user.list;
+    let listString = mablInputs.variables.user.list;
+    if (!listString) { console.log("variable 'list' was not created before this Snippet was run.") }
     // Get the value of the mabl variable "index"
-    let index = parseInt(mablInputs.variables.user.index) + 1;
+    let recievedIndex = mablInputs.variables.user.index;
+    let index = recievedIndex ? parseInt(recievedIndex) -1 : 0
 
     // Split the list it into multiple values
-    list = list.split(",");
+    let listArray = listString.split(",");
 
-    // Return a string that says how many elements were found and informs that they are enabled.
-    console.log("Returned value from index" +  + ": " + list[parseInt(index)]);
-    callback(list[parseInt(index)]);
+    // Get the correct value from the list at the desired index
+    let returnValue = listArray[index];
+
+    // Return a string that says how many elements were found and informs that they are enabled
+    console.log("Returned value from index " + recievedIndex + ": " + returnValue);
+    // Return the desired value
+    callback(returnValue);
 }
