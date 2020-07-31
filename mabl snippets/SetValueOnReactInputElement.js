@@ -35,7 +35,7 @@ function mablJavaScriptStep(mablInputs, callback) {
       valueSetter.call(element, value)
     }
   }
-  setNativeValue(textarea, '<value to input>')
+  setNativeValue(textbox, '<value to input>')
     
   var changeEvent = document.createEvent ('Event');
   changeEvent.initEvent('change', true, false);
