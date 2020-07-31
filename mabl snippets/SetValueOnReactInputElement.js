@@ -18,8 +18,10 @@
  *                              in the following steps in this flow or journey.
  */
 function mablJavaScriptStep(mablInputs, callback) {
+  var query = '<query here>';  //e.g. div.customer-name
+  var inputValue = '<input value to set here>';  
   // Gets the page element by ID  
-  var textbox = document.querySelector('<query here>'); //check that the element is not null or undefined  
+  var textbox = document.querySelector(query); //check that the element is not null or undefined  
 
   if (!textbox) {
     throw Error('Element cannot be found');
@@ -35,10 +37,10 @@ function mablJavaScriptStep(mablInputs, callback) {
       valueSetter.call(element, value)
     }
   }
-  setNativeValue(textbox, '<value to input>')
+  setNativeValue(textbox, inputValue)
     
   var changeEvent = document.createEvent ('Event');
-  changeEvent.initEvent('change', true, false);
+  changeEvent.initEvent('input', true, false);
   textbox.dispatchEvent(changeEvent);  
 
   callback('Value has been inserted into textbox');
