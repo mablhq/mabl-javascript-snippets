@@ -4,6 +4,5 @@
  * @returns {Element} The found element 
  */
 function queryXpath(path) {
-    let element = document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    return element;
+    return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
