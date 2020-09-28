@@ -3,6 +3,6 @@
  * @param {String} path - Xpath to find the desired element
  * @returns {Element} The found element 
  */
-function queryXpath(path) {
+function findFirstElementMatchingXpath(path) {
     return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 }
