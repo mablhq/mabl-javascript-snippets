@@ -1,6 +1,6 @@
 /**
-Returns an object containing values assosiated todays date.
-IE compatiable: true
+Returns an object containing values associated today's date.
+IE compatible: true
 
 To access these options, save the output of this snippet to a variable (I'll call 
 it "date" for the example) and then use this syntax: 
