@@ -1,5 +1,6 @@
 /**
- * Run a small snippet of JavaScript during a mabl flow/journey
+ * This snippet finds a textbox element on the page,
+ * and inserts text into it by setting the value and firing a change event
  * @param {object} mablInputs - Object containing mabl inputs such as variables (mablInputs.variables).
  *                              Use mablInputs.variables.user for user defined variables
  *                              (For example myVar may be accessed as mablInputs.variables.user.myVar)
@@ -20,7 +21,7 @@ function mablJavaScriptStep(mablInputs, callback) {
     throw Error('Element cannot be found');
   }
 
-  // click on textbox and insert text
+  // insert text
   textbox.value = "REPLACE_WITH_TEXT_TO_BE_INSERTED";
 
   // fire a change event
