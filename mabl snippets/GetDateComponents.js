@@ -1,31 +1,35 @@
 /**
 Returns an object containing values associated today's date.
-IE compatible: true
 
-To access these options, save the output of this snippet to a variable (I'll call 
+To access the date attributes listed below, save the output of this snippet to a variable (I'll call 
 it "date" for the example) and then use this syntax: 
     {{@<variable name>.<option>}}
 like this:
     {{@date.monthNumeric}}
 
-OPTIONS:
-- dayNumeric
-- dayTwoDigit
-- monthNumeric
-- monthTwoDigit
-- monthNarrow
-- monthShort
-- monthLong
-- yearNumeric
-- yearTwoDigit
-- hour12TwoDigit
-- hour24TwoDigit
-- hour12Numeric
-- hour24Numeric
-- dayPeriod
-- minute
-- second
- */
+EXAMPLE DATE: February 7th, 2021 at 1:03.09 PM
+
+DATE ATTRIBUTES:
+- dayNumeric     => 7
+- dayTwoDigit    => 07
+- monthNumeric   => 2
+- monthTwoDigit  => 02
+- monthNarrow    => F
+- monthShort     => Feb
+- monthLong      => February
+- yearNumeric    => 2021
+- yearTwoDigit   => 21
+- hour12TwoDigit => 01
+- hour24TwoDigit => 13
+- hour12Numeric  => 1
+- hour24Numeric  => 13
+- dayPeriod      => PM
+- minute         => 03
+- second         => 09
+
+This then can be combined to create dates formatted however you need:
+  "{{@date.yearNumeric}}-{{@date.monthTwoDigit}}-{{@date.dayTwoDigit}}" => "2021-02-07"
+*/
 
 function mablJavaScriptStep(mablInputs, callback) {
   var today = new Date();
@@ -38,12 +42,44 @@ function mablJavaScriptStep(mablInputs, callback) {
   // Yesterday
   // callback(getDateComponentsFor(today.addDays(-1)));
 
-  // Two weeks from now
-  // callback(getDateComponentsFor(today.addDays(14)));
+  // Last Sunday
+  // callback(getDateComponentsFor(today.getPreviousWeekday("sunday")));
 
-  // Two weeks ago
-  // callback(getDateComponentsFor(today.addDays(-14)));
+  // Last Tuesday
+  // callback(getDateComponentsFor(today.getPreviousWeekday("Tuesday")));
+
+  // Next Friday
+  // callback(getDateComponentsFor(today.getPreviousWeekday("Friday").addDays(7)));
+
+  // Next Month
+  // callback(getDateComponentsFor(today.addMonths(1)));
+
+  // Last Month
+  // callback(getDateComponentsFor(today.addMonths(-1)));
 }
+
+
+/* 
+IF you are just trying to use this snippet, you only need to look above this line.
+IF you want to modify this snippet, all of the logic is defined below!
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************** Date Adjusting Methods ****************/
 
 //Adds a method to all "Date" objects in this scope
 //@param {integer} days - The number of days to add to the Date
@@ -54,16 +90,45 @@ Date.prototype.addDays = function (days) {
   return date;
 };
 
+//Adds a method to all "Date" objects in this scope
+//@param {integer} months - The number of months to add to the Date
+//@return {Date} - The new Date
+Date.prototype.addMonths = function (months) {
+  var date = new Date(this.valueOf());
+  date.setMonth(date.getMonth() + months);
+  return date;
+};
+
+//Adds a method to all "Date" objects in this scope
+//@param {string} weekday - The day of the week
+//@return {Date} - The new Date
+Date.prototype.getPreviousWeekday = function (weekday) {
+  weekday = weekday.toLowerCase();
+  var daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  var date = new Date(this.valueOf());
+  var dayIndex = daysOfWeek.indexOf(weekday);
+  var days = date.getDay() * -1 + dayIndex;
+  if (dayIndex >= date.getDay()) {
+    days = days - 7;
+  }
+  date.setDate(date.getDate() + days);
+  return date;
+};
+
 // Formats the date based off of the provided options
 // @param {object {string: string}} option - The options for how to format the date string
-// @return {string} - Formated date matching options
+// @return {string} - Formatted date matching options
 // Formatting the date components:
 // Formatting Options: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
 Date.prototype.format = function (option) {
   var date = new Date(this.valueOf());
   return date.toLocaleDateString("en-US", option);
 };
+
+
 /**************** Date Formatting Methods ****************/
+
+
 // Adds a method to Date objects that gets the month matching a format
 Date.prototype.month = function (format) {
   var region =
