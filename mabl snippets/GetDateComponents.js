@@ -25,8 +25,7 @@ DATE ATTRIBUTES:
 - hour12TwoDigit => 01
 - hour24TwoDigit => 13
 - hour12Numeric  => 1
-- hour24Numeric  => 1
-- DayOfWeekLong  => Sunday
+- hour24Numeric  => 13
 - dayPeriod      => PM
 - minute         => 03
 - second         => 09
