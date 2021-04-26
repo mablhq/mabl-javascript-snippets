@@ -19,6 +19,9 @@ DATE ATTRIBUTES:
 - monthLong      => February
 - yearNumeric    => 2021
 - yearTwoDigit   => 21
+- weekdayNarrow  => S
+- weekdayShort   => Sun
+- weekdayLong    => Sunday
 - hour12TwoDigit => 01
 - hour24TwoDigit => 13
 - hour12Numeric  => 1
@@ -201,6 +204,7 @@ Date.prototype.second = function (format) {
   return ("0" + seconds).slice(-2);
 };
 
+// Adds a method to Date objects that gets the weekday matching a format
 Date.prototype.weekday = function(format) {
   var region =
     arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
