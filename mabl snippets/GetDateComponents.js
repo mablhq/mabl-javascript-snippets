@@ -19,6 +19,9 @@ DATE ATTRIBUTES:
 - monthLong      => February
 - yearNumeric    => 2021
 - yearTwoDigit   => 21
+- weekdayNarrow  => S
+- weekdayShort   => Sun
+- weekdayLong    => Sunday
 - hour12TwoDigit => 01
 - hour24TwoDigit => 13
 - hour12Numeric  => 1
@@ -200,6 +203,15 @@ Date.prototype.second = function (format) {
   return ("0" + seconds).slice(-2);
 };
 
+// Adds a method to Date objects that gets the weekday matching a format
+Date.prototype.weekday = function(format) {
+  var region =
+    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
+  return this.toLocaleDateString(region, {
+    weekday: format
+  });
+}
+
 /*
  * Strings you can passed in for different formats:
  *  - day: "numeric", "2-digit".
@@ -221,6 +233,9 @@ function getDateComponentsFor(date) {
   var monthLong = date.month("long");
   var yearNumeric = date.year("numeric");
   var yearTwoDigit = date.year("2-digit");
+  var weekdayNarrow = date.weekday("narrow");
+  var weekdayShort = date.weekday("short");
+  var weekdayLong = date.weekday("long");
   var hour12TwoDigit = date.hour("2-digit", true);
   var hour24TwoDigit = date.hour("2-digit", false);
   var hour12Numeric = date.hour("numeric", true);
@@ -238,6 +253,9 @@ function getDateComponentsFor(date) {
     monthLong: monthLong,
     yearNumeric: yearNumeric,
     yearTwoDigit: yearTwoDigit,
+    weekdayNarrow: weekdayNarrow,
+    weekdayShort: weekdayShort,
+    weekdayLong: weekdayLong,
     hour12TwoDigit: hour12TwoDigit,
     hour24TwoDigit: hour24TwoDigit,
     hour12Numeric: hour12Numeric,
