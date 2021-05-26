@@ -35,7 +35,7 @@ This then can be combined to create dates formatted however you need:
 */
 
 // The locale used to format the dates
-let locale = "en-us";
+let locale = "en-US";
 // NOTE: Locale may not support Right to Left languages fully
 
 // If you need to adjust the date to a timezone
