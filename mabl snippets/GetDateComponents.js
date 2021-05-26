@@ -34,33 +34,44 @@ This then can be combined to create dates formatted however you need:
   "{{@date.yearNumeric}}-{{@date.monthTwoDigit}}-{{@date.dayTwoDigit}}" => "2021-02-07"
 */
 
+// The locale used to format the dates
+let locale = "en-US";
+// NOTE: Locale may not support Right to Left languages fully
+
+// If you need to adjust the date to a timezone
+// List of timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+// example: "America/Los_Angeles" 
+let timezone = "";
+
 function mablJavaScriptStep(mablInputs, callback) {
   var today = new Date();
   // Today
-  callback(getDateComponentsFor(today));
+  let date = today;
 
   // Tomorrow
-  // callback(getDateComponentsFor(today.addDays(1)));
+  // let date = today.addDays(1);
 
   // Yesterday
-  // callback(getDateComponentsFor(today.addDays(-1)));
+  // let date = today.addDays(-1);
 
   // Last Sunday
-  // callback(getDateComponentsFor(today.getPreviousWeekday("sunday")));
-
-  // Last Tuesday
-  // callback(getDateComponentsFor(today.getPreviousWeekday("Tuesday")));
+  // let date = today.getPreviousWeekday("sunday");
 
   // Next Friday
-  // callback(getDateComponentsFor(today.getPreviousWeekday("Friday").addDays(7)));
-
-  // Next Month
-  // callback(getDateComponentsFor(today.addMonths(1)));
+  // let date = today.getPreviousWeekday("Friday").addDays(7);
 
   // Last Month
-  // callback(getDateComponentsFor(today.addMonths(-1)));
-}
+  // let date = today.addMonths(-1);
 
+  // Next Year
+  // let date = today.addYears(1);
+
+  // Example of chaining functions together
+  // let date = today.getPreviousWeekday("Friday").addYears(1).addMonths(1).addDays(1).addHours(1).addMinutes(1).addSeconds(1);
+
+  // Get the components and return 
+  callback(getDateComponentsFor(date));
+}
 
 /* 
 IF you are just trying to use this snippet, you only need to look above this line.
@@ -85,6 +96,33 @@ IF you want to modify this snippet, all of the logic is defined below!
 /**************** Date Adjusting Methods ****************/
 
 //Adds a method to all "Date" objects in this scope
+//@param {integer} seconds - The number of seconds to add to the Date
+//@return {Date} - The new Date
+Date.prototype.addSeconds = function (seconds) {
+  var date = new Date(this.valueOf());
+  date.setSeconds(date.getSeconds() + seconds);
+  return date;
+};
+
+//Adds a method to all "Date" objects in this scope
+//@param {integer} minutes - The number of minutes to add to the Date
+//@return {Date} - The new Date
+Date.prototype.addMinutes = function (minutes) {
+  var date = new Date(this.valueOf());
+  date.setMinutes(date.getMinutes() + minutes);
+  return date;
+};
+
+//Adds a method to all "Date" objects in this scope
+//@param {integer} hours - The number of hours to add to the Date
+//@return {Date} - The new Date
+Date.prototype.addHours = function (hours) {
+  var date = new Date(this.valueOf());
+  date.setHours(date.getHours() + hours);
+  return date;
+};
+
+//Adds a method to all "Date" objects in this scope
 //@param {integer} days - The number of days to add to the Date
 //@return {Date} - The new Date
 Date.prototype.addDays = function (days) {
@@ -99,6 +137,15 @@ Date.prototype.addDays = function (days) {
 Date.prototype.addMonths = function (months) {
   var date = new Date(this.valueOf());
   date.setMonth(date.getMonth() + months);
+  return date;
+};
+
+//Adds a method to all "Date" objects in this scope
+//@param {integer} years - The number of years to add to the Date
+//@return {Date} - The new Date
+Date.prototype.addYears = function (years) {
+  var date = new Date(this.valueOf());
+  date.setFullYear(date.getFullYear() + years);
   return date;
 };
 
@@ -118,110 +165,82 @@ Date.prototype.getPreviousWeekday = function (weekday) {
   return date;
 };
 
-// Formats the date based off of the provided options
-// @param {object {string: string}} option - The options for how to format the date string
-// @return {string} - Formatted date matching options
-// Formatting the date components:
-// Formatting Options: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat
-Date.prototype.format = function (option) {
-  var date = new Date(this.valueOf());
-  return date.toLocaleDateString("en-US", option);
-};
-
-
 /**************** Date Formatting Methods ****************/
-
 
 // Adds a method to Date objects that gets the month matching a format
 Date.prototype.month = function (format) {
-  var region =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
-  return this.toLocaleDateString(region, {
+  let options = {
     month: format,
-  });
+  };
+  if (timezone) {options.timeZone = timezone};
+  return this.toLocaleDateString(locale, options);
 };
 
 // Adds a method to Date objects that gets the day matching a format
 Date.prototype.day = function (format) {
-  var region =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
-  return this.toLocaleDateString(region, {
+  let options = {
     day: format,
-  });
+  };
+  if (timezone) {options.timeZone = timezone};
+  return this.toLocaleDateString(locale, options);
 };
 
 // Adds a method to Date objects that gets the year matching a format
 Date.prototype.year = function (format) {
-  var region =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
-  return this.toLocaleDateString(region, {
-    year: format,
-  });
+  let options = { year: format };
+  if (timezone) {options.timeZone = timezone};
+  return this.toLocaleDateString(locale, options);
 };
 
 // Adds a method to Date objects that gets the hour matching a format
-Date.prototype.hour = function (format) {
-  var hour12 =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var region =
-    arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "en-us";
-  var hours = this.toLocaleTimeString(region, {
+Date.prototype.hour = function (format, hour12) {
+  let options = {
     hour: format,
     hour12: hour12,
-  });
+  };
+  if (timezone) {options.timeZone = timezone};
+  var hours = this.toLocaleTimeString(locale, options);
   return hours.split(" ")[0];
 };
 
 // Adds a method to Date objects that gets the dayPeriod (AM/PM)
 Date.prototype.dayPeriod = function () {
-  var region =
-    arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "en-us";
-  var hours = this.toLocaleTimeString(region, {
+  let options = {
     hour: "2-digit",
     hour12: true,
-  });
+  };
+  if (timezone) {options.timeZone = timezone};
+  var hours = this.toLocaleTimeString(locale, options);
   return hours.split(" ")[1];
 };
 
 // Adds a method to Date objects that gets the minute matching a format
 Date.prototype.minute = function (format) {
-  var region =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
-  return this.toLocaleTimeString(region, {
+  let options = {
     minute: format,
-  });
+  };
+  if (timezone) {options.timeZone = timezone};
+  return this.toLocaleTimeString(locale, options);
 };
-
 // Adds a method to Date objects that gets the second matching a format
 Date.prototype.second = function (format) {
-  var region =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
-  var seconds = this.toLocaleTimeString(region, {
+  let options = {
     second: format,
-  }); // Handle "2-digit" case not returning 2 characters
-
+  }; 
+  if (timezone) {options.timeZone = timezone};
+  var seconds = this.toLocaleTimeString(locale, options);
+  // Handle "2-digit" case not returning 2 characters
   return ("0" + seconds).slice(-2);
 };
 
 // Adds a method to Date objects that gets the weekday matching a format
-Date.prototype.weekday = function(format) {
-  var region =
-    arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "en-us";
-  return this.toLocaleDateString(region, {
-    weekday: format
-  });
-}
-
-/*
- * Strings you can passed in for different formats:
- *  - day: "numeric", "2-digit".
- *  - weekday: "narrow", "short", "long".
- *  - year: "numeric", "2-digit".
- *  - month: "numeric", "2-digit", "narrow", "short", "long".
- *  - hour: "numeric", "2-digit".
- *  - minute: "numeric", "2-digit".
- *  - second: "numeric", 2-digit".
- */
+Date.prototype.weekday = function (format) {
+  let options = {
+    weekday: format,
+  };
+  if (timezone) {options.timeZone = timezone};
+  return this.toLocaleDateString(locale, options);
+};
 
 function getDateComponentsFor(date) {
   var dayNumeric = date.day("numeric");
