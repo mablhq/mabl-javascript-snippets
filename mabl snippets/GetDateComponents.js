@@ -100,7 +100,7 @@ IF you want to modify this snippet, all of the logic is defined below!
 //@return {Date} - The new Date
 Date.prototype.addSeconds = function (seconds) {
   var date = new Date(this.valueOf());
-  date.setSeconds(date.getSeconds() + seconds);
+  date.setSeconds(date.getSeconds() + Number(seconds));
   return date;
 };
 
@@ -109,7 +109,7 @@ Date.prototype.addSeconds = function (seconds) {
 //@return {Date} - The new Date
 Date.prototype.addMinutes = function (minutes) {
   var date = new Date(this.valueOf());
-  date.setMinutes(date.getMinutes() + minutes);
+  date.setMinutes(date.getMinutes() + Number(minutes));
   return date;
 };
 
@@ -118,7 +118,7 @@ Date.prototype.addMinutes = function (minutes) {
 //@return {Date} - The new Date
 Date.prototype.addHours = function (hours) {
   var date = new Date(this.valueOf());
-  date.setHours(date.getHours() + hours);
+  date.setHours(date.getHours() + Number(hours));
   return date;
 };
 
@@ -127,7 +127,7 @@ Date.prototype.addHours = function (hours) {
 //@return {Date} - The new Date
 Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());
-  date.setDate(date.getDate() + days);
+  date.setDate(date.getDate() + Number(days));
   return date;
 };
 
@@ -136,7 +136,7 @@ Date.prototype.addDays = function (days) {
 //@return {Date} - The new Date
 Date.prototype.addMonths = function (months) {
   var date = new Date(this.valueOf());
-  date.setMonth(date.getMonth() + months);
+  date.setMonth(date.getMonth() + Number(months));
   return date;
 };
 
@@ -145,7 +145,7 @@ Date.prototype.addMonths = function (months) {
 //@return {Date} - The new Date
 Date.prototype.addYears = function (years) {
   var date = new Date(this.valueOf());
-  date.setFullYear(date.getFullYear() + years);
+  date.setFullYear(date.getFullYear() + Number(years));
   return date;
 };
 
