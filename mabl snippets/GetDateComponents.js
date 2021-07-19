@@ -44,30 +44,32 @@ let locale = "en-US";
 let timezone = "";
 
 function mablJavaScriptStep(mablInputs, callback) {
+  let date;
   var today = new Date();
+  
   // Today
-  let date = today;
+  date = today;
 
   // Tomorrow
-  // let date = today.addDays(1);
+  // date = today.addDays(1);
 
   // Yesterday
-  // let date = today.addDays(-1);
+  // date = today.addDays(-1);
 
   // Last Sunday
-  // let date = today.getPreviousWeekday("sunday");
+  // date = today.getPreviousWeekday("sunday");
 
   // Next Friday
-  // let date = today.getPreviousWeekday("Friday").addDays(7);
+  // date = today.getPreviousWeekday("Friday").addDays(7);
 
   // Last Month
-  // let date = today.addMonths(-1);
+  // date = today.addMonths(-1);
 
   // Next Year
-  // let date = today.addYears(1);
+  // date = today.addYears(1);
 
   // Example of chaining functions together
-  // let date = today.getPreviousWeekday("Friday").addYears(1).addMonths(1).addDays(1).addHours(1).addMinutes(1).addSeconds(1);
+  // date = today.getPreviousWeekday("Friday").addYears(1).addMonths(1).addDays(1).addHours(1).addMinutes(1).addSeconds(1);
 
   // Get the components and return 
   callback(getDateComponentsFor(date));
@@ -100,7 +102,7 @@ IF you want to modify this snippet, all of the logic is defined below!
 //@return {Date} - The new Date
 Date.prototype.addSeconds = function (seconds) {
   var date = new Date(this.valueOf());
-  date.setSeconds(date.getSeconds() + seconds);
+  date.setSeconds(date.getSeconds() + Number(seconds));
   return date;
 };
 
@@ -109,7 +111,7 @@ Date.prototype.addSeconds = function (seconds) {
 //@return {Date} - The new Date
 Date.prototype.addMinutes = function (minutes) {
   var date = new Date(this.valueOf());
-  date.setMinutes(date.getMinutes() + minutes);
+  date.setMinutes(date.getMinutes() + Number(minutes));
   return date;
 };
 
@@ -118,7 +120,7 @@ Date.prototype.addMinutes = function (minutes) {
 //@return {Date} - The new Date
 Date.prototype.addHours = function (hours) {
   var date = new Date(this.valueOf());
-  date.setHours(date.getHours() + hours);
+  date.setHours(date.getHours() + Number(hours));
   return date;
 };
 
@@ -127,7 +129,7 @@ Date.prototype.addHours = function (hours) {
 //@return {Date} - The new Date
 Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());
-  date.setDate(date.getDate() + days);
+  date.setDate(date.getDate() + Number(days));
   return date;
 };
 
@@ -136,7 +138,7 @@ Date.prototype.addDays = function (days) {
 //@return {Date} - The new Date
 Date.prototype.addMonths = function (months) {
   var date = new Date(this.valueOf());
-  date.setMonth(date.getMonth() + months);
+  date.setMonth(date.getMonth() + Number(months));
   return date;
 };
 
@@ -145,7 +147,7 @@ Date.prototype.addMonths = function (months) {
 //@return {Date} - The new Date
 Date.prototype.addYears = function (years) {
   var date = new Date(this.valueOf());
-  date.setFullYear(date.getFullYear() + years);
+  date.setFullYear(date.getFullYear() + Number(years));
   return date;
 };
 
@@ -214,13 +216,26 @@ Date.prototype.dayPeriod = function () {
   return hours.split(" ")[1];
 };
 
+// Adds a method to Date objects that gets the ordinal day matching a format
+Date.prototype.dayOrdinal = function (format) {
+  let dayNumber = this.getDate();
+  let nth = ['th', 'st', 'nd', 'rd'][(dayNumber > 3 && dayNumber < 21) || dayNumber % 10 > 3 ? 0 : dayNumber % 10];
+  let options = {
+    day: format,
+  };
+  if (timezone) {options.timeZone = timezone};
+  return this.toLocaleDateString(locale, options) + nth;
+};
+
 // Adds a method to Date objects that gets the minute matching a format
 Date.prototype.minute = function (format) {
   let options = {
     minute: format,
   };
   if (timezone) {options.timeZone = timezone};
-  return this.toLocaleTimeString(locale, options);
+  // Handle "2-digit" case not returning 2 characters
+  let minutes = this.toLocaleTimeString(locale, options);
+  return ("0" + minutes).slice(-2);
 };
 // Adds a method to Date objects that gets the second matching a format
 Date.prototype.second = function (format) {
