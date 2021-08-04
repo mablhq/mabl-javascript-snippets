@@ -2,6 +2,7 @@
  * Simulates right-clicking an element to display a context menu.
  * Customize by adding a CSS selector to the element variable.
  * To use an xPath, integrate the getElementByXpath snippet.
+ * See: https://github.com/mablhq/mabl-javascript-snippets/blob/main/user%20snippets/getElementByXpath.js
  * 
  * Note that this snippet is not compatible with Internet Explorer 11.
  * 
