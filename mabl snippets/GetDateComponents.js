@@ -201,8 +201,12 @@ Date.prototype.hour = function (format, hour12) {
     hour12: hour12,
   };
   if (timezone) {options.timeZone = timezone};
-  var hours = this.toLocaleTimeString(locale, options);
-  return hours.split(" ")[0];
+  var hours = this.toLocaleTimeString(locale, options).split(" ")[0];
+  if (format === "numeric" && !hour12) {
+    //remove the first "0" if its numeric and 24 hour time
+    hours = String(Number(hours));
+  }
+  return hours;
 };
 
 // Adds a method to Date objects that gets the dayPeriod (AM/PM)
