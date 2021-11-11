@@ -35,7 +35,7 @@ function mablJavaScriptStep(mablInputs, callback) {
       let elementTextFound = matchingElements.length != 0;
 
       // Determine if we have scrolled to the bottom of the scroll view
-      let scrolledToBottom = table.scrollTop + table.offsetHeight == table.scrollHeight;
+      let scrolledToBottom = table.scrollTop + table.offsetHeight === table.scrollHeight;
 
       
       // Stop scrolling if the row was found and return
