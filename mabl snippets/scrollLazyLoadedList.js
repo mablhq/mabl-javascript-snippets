@@ -1,53 +1,53 @@
 function mablJavaScriptStep(mablInputs, callback) {
-    // ## Values that one could parameterize ##
-    let scrollViewSelector = 'SELECTOR';
-    let elementSelector = 'SELECTOR';
-    let elementText = 'TEXT_OF_OPTION';
-  
-    // Find the scroll view
-    let table = document.querySelector(scrollViewSelector);
+  // ## Values that one could parameterize ##
+  let scrollViewSelector = "SELECTOR";
+  let elementSelector = "SELECTOR";
+  let elementText = "TEXT_OF_OPTION";
 
-    // Get the height of the number of cells that are loaded at a time
-    let loadedCellsHeight = table.offsetHeight;
+  // Find the scroll view
+  let table = document.querySelector(scrollViewSelector);
 
-    // Create a variable to keep track of the number of times the "scrollDown" function is called
-    let loopCount = 0;
+  // Get the height of the number of cells that are loaded at a time
+  let loadedCellsHeight = table.offsetHeight;
 
-    // Call the "scrollDown" function once every half second
-    let scrollInterval = setInterval(scrollDown, 500);
-  
-    // Function to be called to scroll down 
-    function scrollDown() {
+  // Create a variable to keep track of the number of times the "scrollDown" function is called
+  let loopCount = 0;
 
-      // Increase the value of variable "loopCount" by 1
-      ++loopCount;
+  // Call the "scrollDown" function once every half second
+  let scrollInterval = setInterval(scrollDown, 500);
 
-      // Scroll down the table the height of the loaded cells * the number of times we have looped
-      table.scroll(0,loopCount * loadedCellsHeight);
+  // Function to be called to scroll down
+  function scrollDown() {
+    // Increase the value of variable "loopCount" by 1
+    ++loopCount;
 
-      // Get all the loaded site names
-      let allElements = Array.from(document.querySelectorAll(elementSelector));
+    // Scroll down the table the height of the loaded cells * the number of times we have looped
+    table.scroll(0, loopCount * loadedCellsHeight);
 
-      // Find all the site names that contain the text in variable "elementText"
-      let matchingElements = allElements.filter(cell => cell.innerText.includes(elementText));
+    // Get all the loaded site names
+    let allElements = Array.from(document.querySelectorAll(elementSelector));
 
-      // If the site name we were looking for was there, then there should be 1 value in the array (0 values otherwise)
-      let elementTextFound = matchingElements.length !== 0;
+    // Find all the site names that contain the text in variable "elementText"
+    let matchingElements = allElements.filter((cell) =>
+      cell.innerText.includes(elementText)
+    );
 
-      // Determine if we have scrolled to the bottom of the scroll view
-      let scrolledToBottom = table.scrollTop + table.offsetHeight === table.scrollHeight;
+    // If the site name we were looking for was there, then there should be 1 value in the array (0 values otherwise)
+    let elementTextFound = matchingElements.length !== 0;
 
-      
-      // Stop scrolling if the row was found and return
-      if (elementTextFound) { 
-        callback("Element Found")
-        clearInterval(scrollInterval);
-      }
-      // Stop scrolling if we have reached the bottom of the results and return
-      if (scrolledToBottom) {
-        callback("Element Not Found. Bottom of scroll view reached.")
-        clearInterval(scrollInterval);
-      }
+    // Determine if we have scrolled to the bottom of the scroll view
+    let scrolledToBottom =
+      table.scrollTop + table.offsetHeight === table.scrollHeight;
+
+    // Stop scrolling if the row was found and return
+    if (elementTextFound) {
+      callback("Element Found");
+      clearInterval(scrollInterval);
+    }
+    // Stop scrolling if we have reached the bottom of the results and return
+    if (scrolledToBottom) {
+      callback("Element Not Found. Bottom of scroll view reached.");
+      clearInterval(scrollInterval);
     }
   }
 }
