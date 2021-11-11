@@ -48,7 +48,6 @@ function mablJavaScriptStep(mablInputs, callback) {
         callback("Element Not Found. Bottom of scroll view reached.")
         clearInterval(scrollInterval);
       }
->>>>>>> 9b635e7993add4f6ef0a247a6b401ae305b518d2
     }
   }
 }
