@@ -32,7 +32,7 @@ function mablJavaScriptStep(mablInputs, callback) {
       let matchingElements = allElements.filter(cell => cell.innerText.includes(elementText));
 
       // If the site name we were looking for was there, then there should be 1 value in the array (0 values otherwise)
-      let elementTextFound = matchingElements.length != 0;
+      let elementTextFound = matchingElements.length !== 0;
 
       // Determine if we have scrolled to the bottom of the scroll view
       let scrolledToBottom = table.scrollTop + table.offsetHeight === table.scrollHeight;
