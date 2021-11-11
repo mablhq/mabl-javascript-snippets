@@ -34,44 +34,54 @@ This then can be combined to create dates formatted however you need:
   "{{@date.yearNumeric}}-{{@date.monthTwoDigit}}-{{@date.dayTwoDigit}}" => "2021-02-07"
 */
 
-// The locale used to format the dates
-let locale = "en-US";
-// NOTE: Locale may not support Right to Left languages fully
 
-// If you need to adjust the date to a timezone
-// List of timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-// example: "America/Los_Angeles" 
-let timezone = "";
+let locale, timezone;
 
-function mablJavaScriptStep(mablInputs, callback) {
-  let date;
-  var today = new Date();
+/**
+ * Main function that the mabl JavaScript step will call
+ * 
+ * @param {*} mablInputs - The inputs to the step
+ * @param {*} callback - The output of the JavaScript step
+ * @param {String} locale - The locale used to format the dates
+ *     NOTE: Locale may not support Right to Left languages fully
+ * @param {String} timezone - The timezone to adjust the date to (example: "America/Los_Angeles")
+ *     List of timezones: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+ * @param {String} startDate - The date to adjust
+ */
+
+function mablJavaScriptStep(
+  mablInputs,
+  callback,
+  locale = "en-US",
+  timezone = "",
+  startDate = "",
+  previousWeekday = "",
+  addYears = "0",
+  addMonths = "0",
+  addDays = "0",
+  addHours = "0",
+  addMinutes = "0",
+  addSeconds = "0"
+) {
+  locale = locale || "en-US";
+  timezone = timezone || "";
+  let date = startDate ? new Date(startDate) : new Date();
   
-  // Today
-  date = today;
+  let startDateIsInvalid = isNaN(new Date(startDate).valueOf());
+  if (startDateIsInvalid) {
+    callback("Unable to parse input startDate as date: " + startDate);
+  }
+  
+  date
+    .getPreviousWeekday(previousWeekday)
+    .addYears(parseInt(addYears))
+    .addMonths(parseInt(addMonths))
+    .addDays(parseInt(addDays))
+    .addHours(parseInt(addHours))
+    .addMinutes(parseInt(addMinutes))
+    .addSeconds(parseInt(addSeconds));
 
-  // Tomorrow
-  // date = today.addDays(1);
-
-  // Yesterday
-  // date = today.addDays(-1);
-
-  // Last Sunday
-  // date = today.getPreviousWeekday("sunday");
-
-  // Next Friday
-  // date = today.getPreviousWeekday("Friday").addDays(7);
-
-  // Last Month
-  // date = today.addMonths(-1);
-
-  // Next Year
-  // date = today.addYears(1);
-
-  // Example of chaining functions together
-  // date = today.getPreviousWeekday("Friday").addYears(1).addMonths(1).addDays(1).addHours(1).addMinutes(1).addSeconds(1);
-
-  // Get the components and return 
+  // Get the components and return
   callback(getDateComponentsFor(date));
 }
 
@@ -79,13 +89,6 @@ function mablJavaScriptStep(mablInputs, callback) {
 IF you are just trying to use this snippet, you only need to look above this line.
 IF you want to modify this snippet, all of the logic is defined below!
 */
-
-
-
-
-
-
-
 
 
 
