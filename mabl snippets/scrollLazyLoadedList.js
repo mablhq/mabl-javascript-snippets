@@ -10,12 +10,17 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Get the height of the number of cells that are loaded at a time
     let loadedCellsHeight = table.offsetHeight;
 
+    // Create a variable to keep track of the number of times the "scrollDown" function is called
+    let loopCount = 0;
+
     // Call the "scrollDown" function once every half second
     let scroll_interval = setInterval(scrollDown, 500);
-
   
     // Function to be called to scroll down 
     function scrollDown() {
+
+      // Increase the value of variable "loopCount" by 1
+      ++loopCount;
 
       // Scroll down the table the height of the loaded cells * the number of times we have looped
       table.scroll(0,loopCount * loadedCellsHeight);
@@ -31,6 +36,7 @@ function mablJavaScriptStep(mablInputs, callback) {
 
       // Determine if we have scrolled to the bottom of the scroll view
       let scrolledToBottom = table.scrollTop + table.offsetHeight == table.scrollHeight;
+
       
       // Stop scrolling if the row was found and return
       if (elementTextFound) { 
