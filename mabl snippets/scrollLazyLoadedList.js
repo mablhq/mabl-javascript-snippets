@@ -14,7 +14,7 @@ function mablJavaScriptStep(mablInputs, callback) {
     let loopCount = 0;
 
     // Call the "scrollDown" function once every half second
-    let scroll_interval = setInterval(scrollDown, 500);
+    let scrollInterval = setInterval(scrollDown, 500);
   
     // Function to be called to scroll down 
     function scrollDown() {
@@ -41,12 +41,12 @@ function mablJavaScriptStep(mablInputs, callback) {
       // Stop scrolling if the row was found and return
       if (elementTextFound) { 
         callback("Element Found")
-        clearInterval(scroll_interval);
+        clearInterval(scrollInterval);
       }
       // Stop scrolling if we have reached the bottom of the results and return
       if (scrolledToBottom) {
         callback("Element Not Found. Bottom of scroll view reached.")
-        clearInterval(scroll_interval);
+        clearInterval(scrollInterval);
       }
 >>>>>>> 9b635e7993add4f6ef0a247a6b401ae305b518d2
     }
