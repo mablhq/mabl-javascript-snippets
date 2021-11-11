@@ -72,7 +72,7 @@ function mablJavaScriptStep(
     callback("Unable to parse input startDate as date: " + startDate);
   }
   
-  date
+  date = date
     .getPreviousWeekday(previousWeekday)
     .addYears(parseInt(addYears))
     .addMonths(parseInt(addMonths))
