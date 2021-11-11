@@ -1,3 +1,7 @@
+/**
+ * @NOTE - This is a snippet will not work in Internet Explorer.
+ */
+
 function mablJavaScriptStep(mablInputs, callback) {
   // ## Values that one could parameterize ##
   let scrollViewSelector = "SELECTOR";
