@@ -2,6 +2,7 @@
  * This snippet fetches the last SMS message from Twilio and returns the body.
  * You will need to place your Twilio API credentials in a mabl Credential, and add it to the Plan before running the snippet.
  * Add a phone number in 'toNumberFilter' below, to filter to only a specific inbound phone number.
+ * See code for how to load Twilio configs from Environment Variables rather than Credentials
  *
  * @param {object} mablInputs - Object containing mabl inputs such as variables (mablInputs.variables).
  *                              Use mablInputs.variables.user for user defined variables
@@ -15,10 +16,17 @@
  */
 function mablJavaScriptStep(mablInputs, callback) {
 
+  // <CONFIGS>
+//  // Replace the below with these lines to load from an environment variable
+//  var twilioAccountSid = mablInputs.variables.user.twilioAccountSid;
+//  var twilioAccountAuthToken = mablInputs.variables.user.twilioAccountAuthToken;
+
   // Add Twilio API creds as username: Account SID, password: auth token, add to the plan
   var twilioAccountSid = mablInputs.variables.web.defaults.credentials.username;
   var twilioAccountAuthToken = mablInputs.variables.web.defaults.credentials.password;
+
   var toNumberFilter = undefined; // e.g. "+16177415396"; // add a phone number here, to filter the number
+  // </CONFIGS>
 
   var url = 'https://api.twilio.com/2010-04-01/Accounts/' + twilioAccountSid + '/Messages.json';
 
