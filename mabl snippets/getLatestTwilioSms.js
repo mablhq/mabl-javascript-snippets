@@ -5,7 +5,7 @@
  *
  * @param {object} mablInputs - Object containing mabl inputs such as variables (mablInputs.variables).
  *                              Use mablInputs.variables.user for user defined variables
-https://messages.google.com/web/conversations/new *                              (For example myVar may be accessed as mablInputs.variables.user.myVar)
+ https://messages.google.com/web/conversations/new *                              (For example myVar may be accessed as mablInputs.variables.user.myVar)
  *
  * @param {function} callback - A callback function that must be called to complete
  *                              the javascript step and provide a value to the following
@@ -20,22 +20,22 @@ function mablJavaScriptStep(mablInputs, callback) {
   var twilioAccountAuthToken = mablInputs.variables.web.defaults.credentials.password;
   var toNumberFilter = undefined; // e.g. "+16177415396"; // add a phone number here, to filter the number
 
-  var url = 'https://api.twilio.com/2010-04-01/Accounts/'+twilioAccountSid+'/Messages.json';
+  var url = 'https://api.twilio.com/2010-04-01/Accounts/' + twilioAccountSid + '/Messages.json';
 
   function responseListener(event) {
     var results = JSON.parse(this.responseText);
-    if(results.messages && results.messages.length > 0) {
-      var lastMessage = results.messages.filter(function(message) {
-        if(toNumberFilter) {
-          return  message.to === toNumberFilter;
+    if (results.messages && results.messages.length > 0) {
+      var lastMessage = results.messages.filter(function (message) {
+        if (toNumberFilter) {
+          return message.to === toNumberFilter;
         }
         return true; // no number filtering
       })[0];
 
-      if(lastMessage) {
+      if (lastMessage) {
         return callback(lastMessage.body);
       }
-      throw new Error('No messages matched number: '+toNumberFilter);
+      throw new Error('No messages matched number: ' + toNumberFilter);
     } else {
       throw new Error('No messages found');
     }
@@ -43,16 +43,16 @@ function mablJavaScriptStep(mablInputs, callback) {
 
   function failureHandler(event) {
     console.error('error');
-    throw new Error('Request error: '+event.message);
+    throw new Error('Request error: ' + event.message);
   }
 
   function abortHandler(event) {
     console.error('aborted');
-    throw new Error('Request aborted: '+event.message);
+    throw new Error('Request aborted: ' + event.message);
   }
 
   var request = new XMLHttpRequest();
-  var authHeader = 'Basic ' + btoa(twilioAccountSid+':'+twilioAccountAuthToken);
+  var authHeader = 'Basic ' + btoa(twilioAccountSid + ':' + twilioAccountAuthToken);
   request.addEventListener('load', responseListener);
   request.addEventListener('error', failureHandler);
   request.addEventListener('abort', abortHandler);
