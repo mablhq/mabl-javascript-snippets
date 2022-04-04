@@ -12,11 +12,11 @@
  *                              in the following steps in this flow or journey.
  */
  function mablJavaScriptStep(mablInputs, callback, daysToAdd = undefined) {
-    let today = new Date();
+    var today = new Date();
 
    if(daysToAdd > 0){
         //Adds days for each business day
-        for (let i = 1; i <= daysToAdd; i++) {
+        for (var i = 1; i <= daysToAdd; i++) {
             today.setDate(today.getDate() +1);
             if (today.getDay() === 6) {
                 today.setDate(today.getDate() +2);
@@ -27,7 +27,7 @@
         }
     }
     else{
-        for (let i = daysToAdd; i <= 0; i++) {
+        for (var i = daysToAdd; i <= 0; i++) {
             today.setDate(today.getDate()-1);
             if (today.getDay() === 6) {
                 today.setDate(today.getDate()-2);
@@ -39,7 +39,7 @@
     }
    
 
-   let finalDateTime = today.toLocaleString();
+   var finalDateTime = today.toLocaleString();
    finalDateTime = finalDateTime.substring(0,finalDateTime.indexOf(",")); //Substring to remove everything after comma
    
    // perform the callback with the result
