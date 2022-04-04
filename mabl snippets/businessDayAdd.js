@@ -13,17 +13,30 @@
  */
  function mablJavaScriptStep(mablInputs, callback, daysToAdd = undefined) {
     let today = new Date();
-   
-    //Adds days for each business day
-    for (let i = 1; i <= daysToAdd; i++) {
-        today.setDate(today.getDate() + 1);
-        if (today.getDay() === 6) {
-            today.setDate(today.getDate() + 2);
+
+   if(daysToAdd > 0){
+        //Adds days for each business day
+        for (let i = 1; i <= daysToAdd; i++) {
+            today.setDate(today.getDate() +1);
+            if (today.getDay() === 6) {
+                today.setDate(today.getDate() +2);
+            }
+            else if (today.getDay() === 0) {
+                today.setDate(today.getDate() +1);
+            }
         }
-        else if (today.getDay() === 0) {
-            today.setDate(today.getDate() + 1);
+    }
+    else{
+        for (let i = daysToAdd; i < 0; i++) {
+            today.setDate(today.getDate()-1);
+            if (today.getDay() === 6) {
+                today.setDate(today.getDate()-2);
+            }
+            else if (today.getDay() === 0) {
+                today.setDate(today.getDate()-1);
+            }
         }
-   }
+    }
    
 
    let finalDateTime = today.toLocaleString();
