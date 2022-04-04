@@ -27,7 +27,7 @@
         }
     }
     else{
-        for (let i = daysToAdd; i < 0; i++) {
+        for (let i = daysToAdd; i <= 0; i++) {
             today.setDate(today.getDate()-1);
             if (today.getDay() === 6) {
                 today.setDate(today.getDate()-2);
