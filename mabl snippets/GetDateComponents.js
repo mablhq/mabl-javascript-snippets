@@ -264,6 +264,7 @@ Date.prototype.weekday = function (format) {
 function getDateComponentsFor(date) {
   var dayNumeric = date.day("numeric");
   var dayTwoDigit = date.day("2-digit");
+  var dayOrdinal = date.dayOrdinal("numeric");
   var monthNumeric = date.month("numeric");
   var monthTwoDigit = date.month("2-digit");
   var monthNarrow = date.month("narrow");
@@ -284,6 +285,7 @@ function getDateComponentsFor(date) {
   return {
     dayNumeric: dayNumeric,
     dayTwoDigit: dayTwoDigit,
+    dayOrdinal: dayOrdinal,
     monthNumeric: monthNumeric,
     monthTwoDigit: monthTwoDigit,
     monthNarrow: monthNarrow,
