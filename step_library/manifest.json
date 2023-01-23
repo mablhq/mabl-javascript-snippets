@@ -39,6 +39,13 @@
             "tooltip": "Simulates pressing the browsers forward button.",
             "save_to_variable": false,
             "parameters": []
+        },
+        {
+            "title": "Save current URL to variable",
+            "path": "/step_library/saveCurrentUrlToVariable.js",
+            "tooltip": "Saves the current URL to variable.",
+            "save_to_variable": true,
+            "parameters": []
         }
     ]
 }
