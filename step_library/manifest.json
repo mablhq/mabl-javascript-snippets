@@ -1,0 +1,30 @@
+{
+    "functions": [
+        {
+            "title": "Search and replace in a value",
+            "path": "/functions/replaceString.js",
+            "tooltip": "Replace all instances of a found string in your text with another value. (Tip: This can be empty to delete characters)",
+            "save_to_variable": true,
+            "parameters": [
+                {
+                    "display_name": "Starting value",
+                    "name": "value",
+                    "placeholder": "$1000.00",
+                    "description": "What value or text do you want to search and replace text in? (Tip: You would use '{{@varName}}' to enter a the variable 'varName'.)"
+                },
+                {
+                    "display_name": "String of characters to search for",
+                    "name": "findValue",
+                    "placeholder": 2,
+                    "description": "What text exists in the Starting value that you want to replace?"
+                },
+                {
+                    "display_name": "Value to replace all instances found of the string of characters with.",
+                    "name": "findValue",
+                    "placeholder": 2,
+                    "description": "What text do you watch to replace the found string of characters with in the Starting value ?"
+                }
+            ]
+        }
+    ]
+}
