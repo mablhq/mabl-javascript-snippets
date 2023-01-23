@@ -25,6 +25,13 @@
                     "description": "What text do you watch to replace the found string of characters with in the Starting value?"
                 }
             ]
+        },
+        {
+            "title": "Browser back button",
+            "path": "/step_library/browserBackButton.js",
+            "tooltip": "Simulates pressing the browsers back button.",
+            "save_to_variable": false,
+            "parameters": []
         }
     ]
 }
