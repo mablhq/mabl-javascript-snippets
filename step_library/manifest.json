@@ -2,7 +2,7 @@
     "functions": [
         {
             "title": "Search and replace in a value",
-            "path": "/step_library/replaceTextInString.js",
+            "path": "step_library/replaceTextInString.js",
             "tooltip": "Replace all instances of a found string in your text with another value. (Tip: This can be empty to delete characters)",
             "save_to_variable": true,
             "parameters": [
@@ -28,21 +28,21 @@
         },
         {
             "title": "Browser back button",
-            "path": "/step_library/browserBackButton.js",
+            "path": "step_library/browserBackButton.js",
             "tooltip": "Simulates pressing the browsers back button.",
             "save_to_variable": false,
             "parameters": []
         },
         {
             "title": "Browser forward button",
-            "path": "/step_library/browserForwardButton.js",
+            "path": "step_library/browserForwardButton.js",
             "tooltip": "Simulates pressing the browsers forward button.",
             "save_to_variable": false,
             "parameters": []
         },
         {
             "title": "Save current URL to variable",
-            "path": "/step_library/saveCurrentUrlToVariable.js",
+            "path": "step_library/saveCurrentUrlToVariable.js",
             "tooltip": "Saves the current URL to variable.",
             "save_to_variable": true,
             "parameters": []
