@@ -32,6 +32,13 @@
             "tooltip": "Simulates pressing the browsers back button.",
             "save_to_variable": false,
             "parameters": []
+        },
+        {
+            "title": "Browser forward button",
+            "path": "/step_library/browserForwardButton.js",
+            "tooltip": "Simulates pressing the browsers back button.",
+            "save_to_variable": false,
+            "parameters": []
         }
     ]
 }
