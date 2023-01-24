@@ -42,7 +42,7 @@
                             "name": "value",
                             "id": 0,
                             "placeholder": "{{@myVar}}",
-                            "description": "What value or text do you want to find and replace text in? (Tip: You would use '{{@varName}}' to enter a the variable 'varName'.)"
+                            "description": "What value or text do you want to find and replace text in? (Tip: You would use '{{@varName}}' to enter the variable 'varName')"
                         },
                         {
                             "display_name": "String of characters to find for",
