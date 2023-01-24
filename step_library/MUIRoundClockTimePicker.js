@@ -1,4 +1,10 @@
-function mablJavaScriptStep(mablInputs, callback, numberToClick) {
+function mablJavaScriptStep(
+  mablInputs,
+  callback,
+  numberToClick,
+  clockNumberSelector = "[class*='MuiPickersClock'] [role='menu']",
+  clockFaceSelector = "span[class*='clockNumber']"
+) {
   // Creates the function to send the clicks to the element.
   function clickElementAt(element, x, y) {
     let e = element.ownerDocument.createEvent("MouseEvents");
@@ -25,17 +31,14 @@ function mablJavaScriptStep(mablInputs, callback, numberToClick) {
     });
   }
 
-  let clockElement = document.querySelector(
-    "[class*='MuiPickersClock'] [role='menu']"
-  );
+  let clockElement = document.querySelector(clockFaceSelector);
 
-  let clockNumber = Array.from(
-    document.querySelectorAll('span[class*="clockNumber"]')
-  ).filter((clockNumber) => {
-    return clockNumber.innerText === numberToClick;
+  let clockNumbers = Array.from(document.querySelectorAll(clockNumberSelector));
+  let clockNumberToClick = clockNumbers.filter((clockNumber) => {
+    clockNumber.innerText === numberToClick;
   })[0];
 
-  let rect = clockNumber.getBoundingClientRect();
+  let rect = clockNumberToClick.getBoundingClientRect();
   let x = rect.x;
   let y = rect.y;
 

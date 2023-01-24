@@ -58,6 +58,20 @@
                     "variable_name": "numberToClick",
                     "placeholder": "7",
                     "description": "Enter a number visible on the clock to click. (NOTE: The number to click MUST be visible on the clock or this step will not work."
+                },
+                {
+                    "display_name": "Clock Number CSS Selector",
+                    "variable_name": "clockNumberSelector",
+                    "default": "span[class*='clockNumber']",
+                    "placeholder": "CSS Selector finding all of the clock numbers",
+                    "description": "Leave this as it is unless this does not work for your clock example. If you find this step does not work, then enter a CSS Selector that finds all of the clock numbers currently displayed."
+                },
+                {
+                    "display_name": "Clock Face CSS Selector",
+                    "variable_name": "clockFaceSelector",
+                    "default": "[class*='MuiPickersClock'] [role='menu']",
+                    "placeholder": "CSS Selector finding the clock face",
+                    "description": "Leave this as it is unless this does not work for your clock example. If you find this step does not work, then enter a CSS Selector that finds the clock face."
                 }
             ]
         }
