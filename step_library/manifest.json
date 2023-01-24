@@ -32,7 +32,7 @@
             "description": "Functions that manipulate and modify the text in a variable",
             "steps": [
                 {
-                    "title": "Search and replace in a value",
+                    "title": "Find and replace in a value",
                     "path": "step_library/replaceTextInString.js",
                     "description": "Replace all instances of a found string in your text with another value. (Tip: This can be empty to delete characters)",
                     "save_to_variable": true,
@@ -42,10 +42,10 @@
                             "name": "value",
                             "id": 0,
                             "placeholder": "{{@myVar}}",
-                            "description": "What value or text do you want to search and replace text in? (Tip: You would use '{{@varName}}' to enter a the variable 'varName'.)"
+                            "description": "What value or text do you want to find and replace text in? (Tip: You would use '{{@varName}}' to enter a the variable 'varName'.)"
                         },
                         {
-                            "display_name": "String of characters to search for",
+                            "display_name": "String of characters to find for",
                             "name": "find",
                             "id": 1,
                             "placeholder": "World",
@@ -57,6 +57,21 @@
                             "id": 2,
                             "placeholder": "Tester",
                             "description": "What text do you watch to replace the found string of characters with in the Starting value?"
+                        }
+                    ]
+                },
+                {
+                    "title": "Remove accents from value",
+                    "path": "step_library/removeAccentsFromCharacters.js",
+                    "description": "Replaces all accented characters in a string with the non-accented version",
+                    "save_to_variable": true,
+                    "parameters": [
+                        {
+                            "display_name": "Value to remove accents from",
+                            "name": "value",
+                            "id": 0,
+                            "placeholder": "{{@myVar}}",
+                            "description": "The value you want to remove the accents from"
                         }
                     ]
                 }
