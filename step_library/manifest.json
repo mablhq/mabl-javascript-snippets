@@ -50,7 +50,7 @@
                             "description": "What text exists in the Starting value that you want to replace?"
                         },
                         {
-                            "display_name": "Value to replace all instances found of the string of characters with.",
+                            "display_name": "Value to replace all instances found of the string of characters with",
                             "name": "replace",
                             "id": 2,
                             "placeholder": "Tester",
