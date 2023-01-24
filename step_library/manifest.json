@@ -2,6 +2,7 @@
     "categories": [
         {
             "title": "Browser controls and values",
+            "description": "Control the browser and save values like the current url to variables",
             "steps": [
                 {
                     "title": "Browser back button",
@@ -27,7 +28,8 @@
             ]
         },
         {
-            "title": "Browser controls and values",
+            "title": "Text manipulation",
+            "description": "Functions that manipulate and modify the text in a variable",
             "steps": [
                 {
                     "title": "Search and replace in a value",
@@ -39,7 +41,7 @@
                             "display_name": "Starting value",
                             "name": "value",
                             "id": 0,
-                            "placeholder": "Hello World!",
+                            "placeholder": "{{@myVar}}",
                             "description": "What value or text do you want to search and replace text in? (Tip: You would use '{{@varName}}' to enter a the variable 'varName'.)"
                         },
                         {
