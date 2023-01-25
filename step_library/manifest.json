@@ -107,7 +107,7 @@
                 {
                     "title": "Get nth element from a list",
                     "path": "step_library/getElementAtIndex.js",
-                    "description": "Returns an element from a given list at the given index (Great for interating through a list in your loops!)",
+                    "description": "Returns an element from a given list at the given index (Great for interating through a list in your loops!)(NOTE: The list is one-indexed)",
                     "save_to_variable": true,
                     "parameters": [
                         {
