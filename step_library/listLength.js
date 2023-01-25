@@ -1,3 +1,3 @@
-function mablJavaScriptStep(mablInputs, callback, delimiter, value) {
-    callback(value.split(delimiter).length);
+function mablJavaScriptStep(mablInputs, callback, list, delimiter) {
+    callback(list.split(delimiter).length);
 }

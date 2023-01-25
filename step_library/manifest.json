@@ -93,6 +93,14 @@
                             "id": 0,
                             "placeholder": "{{@myVar}}",
                             "description": "The list you want the length of"
+                        },
+                        {
+                            "display_name": "Separator",
+                            "name": "delimiter",
+                            "id": 1,
+                            "default_value": ",",
+                            "placeholder": ",",
+                            "description": "The character that separates the values in your list"
                         }
                     ]
                 },
@@ -133,6 +141,28 @@
                         }
                     ]
                 },
+                {
+                    "title": "Push an element onto a list",
+                    "path": "step_library/listPush.js",
+                    "description": "Adds an element to the end of a list",
+                    "save_to_variable": true,
+                    "parameters": [
+                        {
+                            "display_name": "List",
+                            "name": "list",
+                            "id": 0,
+                            "placeholder": "{{@myVar}}",
+                            "description": "The list you want to add an element to"
+                        },
+                        {
+                            "display_name": "Element",
+                            "name": "elt",
+                            "id": 1,
+                            "placeholder": "{{@myVar}}",
+                            "description": "The element you want to push onto a list"
+                        }
+                    ]
+                }
             ]
         }
     ]
