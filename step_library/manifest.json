@@ -181,6 +181,43 @@
                     ]
                 }
             ]
+        },
+        {
+            "title": "Advanced UI Interactions",
+            "description": "Interactions that are based on specific UI elements that require some additional support",
+            "steps": [
+                {
+                    "title": "Choose time on MUI round time picker.",
+                    "path": "/step_library/MUIRoundClockTimePicker.js",
+                    "description": "Click on a specific time in the front most visible Material UI round clock time picker.",
+                    "save_to_variable": false,
+                    "parameters": [
+                        {
+                            "display_name": "Number to click",
+                            "name": "numberToClick",
+                            "id": 0,
+                            "placeholder": "7",
+                            "description": "Enter a number visible on the clock to click. (NOTE: The number to click MUST be visible on the clock or this step will not work."
+                        },
+                        {
+                            "display_name": "Clock Number CSS Selector",
+                            "name": "clockNumberSelector",
+                            "id": 1,
+                            "default_value": "span[class*='clockNumber']",
+                            "placeholder": "CSS Selector finding all of the clock numbers",
+                            "description": "Enter a CSS Selector that finds all of the clock numbers currently displayed. NOTE: Only modify this if the default values don't actually find the correct elements."
+                        },
+                        {
+                            "display_name": "Clock Face CSS Selector",
+                            "name": "clockFaceSelector",
+                            "id": 2,
+                            "default_value": "[class*='MuiPickersClock'] [role='menu']",
+                            "placeholder": "CSS Selector finding the clock face",
+                            "description": "Enter a CSS Selector that finds the clock face. NOTE: Only modify this if the default values don't actually find the correct elements."
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
