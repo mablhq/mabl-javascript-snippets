@@ -188,7 +188,7 @@
             "steps": [
                 {
                     "title": "Choose time on MUI round time picker.",
-                    "path": "/step_library/MUIRoundClockTimePicker.js",
+                    "path": "/step_library/muiRoundClockTimePicker.js",
                     "description": "Click on a specific time in the front most visible Material UI round clock time picker.",
                     "save_to_variable": false,
                     "parameters": [
