@@ -1,9 +1,9 @@
 function mablJavaScriptStep(
   mablInputs,
   callback,
-  clockFaceSelector = '[class*="MuiPickersClock"] [role="menu"]',
+  numberToClick = undefined,
   clockNumberSelector = 'span[class*="clockNumber"]',
-  numberToClick = undefined
+  clockFaceSelector = '[class*="MuiPickersClock"] [role="menu"]'
 ) {
   let clockElement = document.querySelector(clockFaceSelector);
 
