@@ -1,10 +1,6 @@
-function mablJavaScriptStep(
-  mablInputs,
-  callback,
-  numberToClick = undefined,
-  clockNumberSelector = 'span[class*="clockNumber"]',
-  clockFaceSelector = '[class*="MuiPickersClock"] [role="menu"]'
-) {
+function mablJavaScriptStep(mablInputs, callback, numberToClick = undefined) {
+  let clockNumberSelector = 'span[class*="clockNumber"]';
+  let clockFaceSelector = '[class*="MuiPickersClock"] [role="menu"]';
   let clockElement = document.querySelector(clockFaceSelector);
 
   let clockNumbers = Array.from(document.querySelectorAll(clockNumberSelector));
