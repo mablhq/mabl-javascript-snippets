@@ -203,7 +203,7 @@
                             "display_name": "Clock Number CSS Selector",
                             "name": "clockNumberSelector",
                             "id": 1,
-                            "default_value": "span[class*='clockNumber']",
+                            "default_value": "span[class*=\"clockNumber\"]",
                             "placeholder": "CSS Selector finding all of the clock numbers",
                             "description": "Enter a CSS Selector that finds all of the clock numbers currently displayed. NOTE: Only modify this if the default values don't actually find the correct elements."
                         },
@@ -211,7 +211,7 @@
                             "display_name": "Clock Face CSS Selector",
                             "name": "clockFaceSelector",
                             "id": 2,
-                            "default_value": "[class*='MuiPickersClock'] [role='menu']",
+                            "default_value": "[class*=\"MuiPickersClock\"] [role=\"menu\"]",
                             "placeholder": "CSS Selector finding the clock face",
                             "description": "Enter a CSS Selector that finds the clock face. NOTE: Only modify this if the default values don't actually find the correct elements."
                         }
