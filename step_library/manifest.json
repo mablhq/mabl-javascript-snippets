@@ -121,8 +121,16 @@
                             "display_name": "Index",
                             "name": "index",
                             "id": 1,
-                            "placeholder": "{{@run.loop_index}}",
+                            "placeholder": "Example: {{@run.loop_index}}",
                             "description": "The position in the list from which you'd like the element"
+                        },
+                        {
+                            "display_name": "Separator",
+                            "name": "delimiter",
+                            "id": 2,
+                            "default_value": ",",
+                            "placeholder": ",",
+                            "description": "The character that separates the values in your list"
                         }
                     ]
                 },
@@ -138,6 +146,14 @@
                             "id": 0,
                             "placeholder": "{{@myVar}}",
                             "description": "The list you want to sort"
+                        },
+                        {
+                            "display_name": "Separator",
+                            "name": "delimiter",
+                            "id": 1,
+                            "default_value": ",",
+                            "placeholder": ",",
+                            "description": "The character that separates the values in your list"
                         }
                     ]
                 }
