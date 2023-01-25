@@ -79,7 +79,7 @@
         },
         {
             "title": "Working with Lists",
-            "description": "Functions that manipulate and modify values in a list",
+            "description": "Steps that provide control over a list of values with a separator, such as comma separated values",
             "steps": [
                 {
                     "title": "Find the length of a list",
@@ -129,7 +129,7 @@
                 {
                     "title": "Sort a list",
                     "path": "step_library/listSort.js",
-                    "description": "Sorts a list",
+                    "description": "Sorts a list in ascending/alphabetical order",
                     "save_to_variable": true,
                     "parameters": [
                         {
