@@ -107,7 +107,7 @@
                 {
                     "title": "Get nth element from a list",
                     "path": "step_library/getElementAtIndex.js",
-                    "description": "Returns an element from a given list at the given index (Great for interating through a list in your loops!)(NOTE: The list is one-indexed)",
+                    "description": "Returns an element from a given list at the given index (Great for interating through a list in your loops!) (NOTE: The list is one-indexed)",
                     "save_to_variable": true,
                     "parameters": [
                         {
@@ -135,9 +135,32 @@
                     ]
                 },
                 {
-                    "title": "Sort a list",
-                    "path": "step_library/listSort.js",
+                    "title": "Sort a list in ascending order",
+                    "path": "step_library/listSortAscending.js",
                     "description": "Sorts a list in ascending/alphabetical order",
+                    "save_to_variable": true,
+                    "parameters": [
+                        {
+                            "display_name": "List",
+                            "name": "list",
+                            "id": 0,
+                            "placeholder": "{{@myVar}}",
+                            "description": "The list you want to sort"
+                        },
+                        {
+                            "display_name": "Separator",
+                            "name": "delimiter",
+                            "id": 1,
+                            "default_value": ",",
+                            "placeholder": ",",
+                            "description": "The character that separates the values in your list"
+                        }
+                    ]
+                },
+                {
+                    "title": "Sort a list in descending order",
+                    "path": "step_library/listSortDescending.js",
+                    "description": "Sorts a list in descending/reverse alphabetical order",
                     "save_to_variable": true,
                     "parameters": [
                         {
