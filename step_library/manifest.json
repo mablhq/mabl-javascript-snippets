@@ -105,7 +105,7 @@
                     ]
                 },
                 {
-                    "title": "Get an element at an index",
+                    "title": "Get nth element from a list",
                     "path": "step_library/getElementAtIndex.js",
                     "description": "Returns an element from a given list at the given index",
                     "save_to_variable": true,
@@ -138,28 +138,6 @@
                             "id": 0,
                             "placeholder": "{{@myVar}}",
                             "description": "The list you want to sort"
-                        }
-                    ]
-                },
-                {
-                    "title": "Push an element onto a list",
-                    "path": "step_library/listPush.js",
-                    "description": "Adds an element to the end of a list",
-                    "save_to_variable": true,
-                    "parameters": [
-                        {
-                            "display_name": "List",
-                            "name": "list",
-                            "id": 0,
-                            "placeholder": "{{@myVar}}",
-                            "description": "The list you want to add an element to"
-                        },
-                        {
-                            "display_name": "Element",
-                            "name": "elt",
-                            "id": 1,
-                            "placeholder": "{{@myVar}}",
-                            "description": "The element you want to push onto a list"
                         }
                     ]
                 }
