@@ -12,4 +12,4 @@ The examples included in the mabl snippets are examples of special circumstances
  
  ## user resources
  
-  If you're unfamiliar with the javascript and wish to learn how it works or just need a reference the [Mozilla Developer Docs](https://www.w3schools.com/jsref/default.asp) or [w3Schools](https://www.w3schools.com/jsref/default.asp)
+  If you're unfamiliar with the Javascript and wish to learn how it works or just need a reference the [Mozilla Developer Docs](https://www.w3schools.com/jsref/default.asp) or [w3Schools](https://www.w3schools.com/jsref/default.asp)
