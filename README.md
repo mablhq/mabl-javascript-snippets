@@ -10,3 +10,6 @@ The examples included in the mabl snippets are examples of special circumstances
  
  The snippets in this folder are customer submitted examples of JavaScript code that they have used in their own testing that may be useful to other customers. You can find more information regarding user snippets [here](https://github.com/EdgarJoelM/mabl-JavaScript-snippets/blob/master/user%20snippets/README.md).
  
+ ## user resources
+ 
+  If you're unfamiliar with the Javascript and wish to learn how it works or just need a reference the [Mozilla Developer Docs](https://www.w3schools.com/jsref/default.asp) or [w3Schools](https://www.w3schools.com/jsref/default.asp)
