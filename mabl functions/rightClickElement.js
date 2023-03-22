@@ -1,4 +1,6 @@
 /**
+ * Right-click interactions are now natively supported by the mabl Trainer. 
+ * For more info, see the changelog: https://help.mabl.com/changelog/right-click-support
  * Right click on element 
  * @param {HTMLElement} element - The element in the page you want to right click
  */
