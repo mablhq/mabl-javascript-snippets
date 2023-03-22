@@ -1,4 +1,6 @@
 /**
+ * Right-click interactions are now natively supported by the mabl Trainer. 
+ * For more info, see the changelog: https://help.mabl.com/changelog/right-click-support
  * Simulates right-clicking an element to display a context menu.
  * Customize by adding a CSS selector to the element variable.
  * To use an xPath, integrate the getElementByXpath snippet.
