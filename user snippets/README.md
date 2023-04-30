@@ -12,7 +12,7 @@ Create a JavaScript snippet in your mabl code editor. Assure that the code prope
 Sign up for a mabl account at our website [here](https://www.mabl.com).
 
 
-Download the mabl chrome extension [here](https://chrome.google.com/webstore/detail/mabl-trainer/npfildagndinaoofhecikgcfcohfapeo).
+Download the mabl desktop application [here](https://www.mabl.com/desktop-app).
 
 
 ## Contributing
