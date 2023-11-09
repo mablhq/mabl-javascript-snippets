@@ -1,9 +1,6 @@
 /**
  * This snippet will allow you to assert against an element 
  * as long as the element is visible.
- * @param {object} - mablInputs Object containing input
- *                   variables (mablInputs.variables.user)
- * @param {function} callback - The callback function
  */
 function mablJavaScriptStep(mablInputs, callback) {
 
