@@ -1,12 +1,14 @@
-function mablJavaScriptStep(mablInputs, callback) {
+/*
+* Looks for an element of an id, collects the numer of items within, and randomly selects one.
+*/
+function mablJavaScriptStep(mablInputs, callback, elementId = 'day', tagName = 'option') {
 
-  const myfunction = ()=> {
-    let select = document.getElementById('day'); //Replce 'day' with your CSS selector
-    let items = select.getElementsByTagName('option'); //Confirm your element tagnames and adjust as necessary
+    let select = document.getElementById(elementId);
+    //Confirm your element tagnames and adjust as necessary
+    let items = select.getElementsByTagName(tagName);
     let index = Math.floor(Math.random() * items.length);
 
     select.selectedIndex = index;
-    return false;
-  }
-  callback(myfunction());
+
+    callback("Selected index " + index);
 }

@@ -3,18 +3,10 @@
  */
 function mablJavaScriptStep(mablInputs, callback, cookieName = 'myCookie') {
 
-  let name = cookieName + "=";
-  let decodedCookie = decodeURIComponent(document.cookie);
-  let ca = decodedCookie.split(';');
-  for(let i = 0; i <ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${cookieName}=`);
+    if (parts.length === 2) {
+        callback(parts.pop().split(';').shift());
     }
-    if (c.indexOf(name) == 0) {
-      console.log(c.substring(name.length, c.length));
-      callback (c.substring(name.length, c.length));
-    }
-  }
-  callback ("");
+    callback("Cookie not found");
 }

@@ -6,10 +6,9 @@
  * @param {function} callback - The callback function
  */
 function mablJavaScriptStep(mablInputs, callback, param = 'name') {
-
-  let url_string = document.URL; // gets the current URL
-  let url = new URL(url_string);
-  let value = url.searchParams.get(param);
-  callback(value);
+    // Gets the current URL
+    let url_string = document.URL;
+    let url = new URL(url_string);
+    callback(url.searchParams.get(param));
 
 }

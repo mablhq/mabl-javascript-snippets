@@ -9,12 +9,12 @@ function mablJavaScriptStep(mablInputs, callback) {
 
     // Can be used to target a div element by class name, id, etc. Replace element with your desired element.
     const element = document.querySelector('.element');
-    
+
     // check to see if the element exists before interaction
     if (!element) {
-        throw Error('Element was not found'); 
-    } 
-    
+        throw Error('Element was not found');
+    }
+
     // Looks inside the above element for svg then g then path. Replace with desired path.
     const svgElement = element.querySelector('svg g path');
 

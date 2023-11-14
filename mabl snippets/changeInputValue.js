@@ -5,8 +5,8 @@
 * The current values have been left as an example
 */
 
-function mablJavaScriptStep(mablInputs, callback, text = 'changed it', xpath = '//html[1]/body[1]/div[1]/div[2]/div[1]/div[2]/form[1]/div[1]/div[1]/div[1]/input[1]') {
-  let output = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-  output.value = text;
-  callback(output.value);
+function mablJavaScriptStep(mablInputs, callback, text = 'changed it', xpath = '//input[@type="text"]') {
+    let output = document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+    output.value = text;
+    callback(output.value);
 }

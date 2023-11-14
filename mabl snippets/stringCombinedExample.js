@@ -1,7 +1,7 @@
 /**
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
-*
-*/
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+ *
+ */
 function mablJavaScriptStep(mablInputs, callback) {
 
     // indexOf
@@ -17,14 +17,12 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Expected output: "The index of the 2nd "dog" is 52"
 
 
-
     // match, using regex at your own risk
     const regex = /[A-Z]/g;
     const found = paragraph.match(regex);
 
     console.log(found);
     // Expected output: Array ["T", "I"]
-
 
 
     // normalize(), for converting unicode to human readable
@@ -49,7 +47,6 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Expected output: true
 
 
-
     // replace()
     const p = 'The quick brown fox jumps over the lazy dog. If the dog reacted, was it really lazy?';
 
@@ -60,7 +57,6 @@ function mablJavaScriptStep(mablInputs, callback) {
     const regexReplace = /Dog/i;
     console.log(p.replace(regexReplace, 'ferret'));
     // Expected output: "The quick brown fox jumps over the lazy ferret. If the dog reacted, was it really lazy?"
-
 
 
     // slice, returns a section of string as a new string
@@ -76,7 +72,6 @@ function mablJavaScriptStep(mablInputs, callback) {
 
     console.log(str.slice(-9, -5));
     // Expected output: "lazy"
-
 
 
     // split
@@ -95,7 +90,6 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Expected output: Array ["The quick brown fox jumps over the lazy dog."]
 
 
-
     // substring
     str = 'Mozilla';
 
@@ -106,13 +100,11 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Expected output: "zilla"
 
 
-
     // toLowerCase
     const sentence = 'The quick brown fox jumps over the lazy dog.';
 
     console.log(sentence.toLowerCase());
     // Expected output: "the quick brown fox jumps over the lazy dog."
-
 
 
     // trim, removes whitespace from both sides of string
@@ -125,6 +117,6 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Expected output: "Hello world!";
 
 
-  let result = 'strings';
-  callback(result);
+    let result = 'strings';
+    callback(result);
 }
