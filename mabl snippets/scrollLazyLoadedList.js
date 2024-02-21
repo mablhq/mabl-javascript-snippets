@@ -1,12 +1,9 @@
 /**
- * @NOTE - This is a snippet will not work in Internet Explorer.
- */
-
-function mablJavaScriptStep(mablInputs, callback) {
-    // ## Values that one could parameterize ##
-    let scrollViewSelector = "SELECTOR";
-    let elementSelector = "SELECTOR";
-    let elementText = "TEXT_OF_OPTION";
+*
+*
+*
+**/
+function mablJavaScriptStep(mablInputs, callback, scrollViewSelector = 'SELECTOR', elementSelector = 'SELECTOR', elementText = 'TEXT_OF_OPTION') {
 
     // Find the scroll view
     let table = document.querySelector(scrollViewSelector);

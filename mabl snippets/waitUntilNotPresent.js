@@ -1,23 +1,18 @@
 /**
-  * TITLE: Wait until the provided element is no longer present up to 15 seconds
-  *        testing every 100 ms
- *        Note that this snippet will NOT work in Internet Explorer 11
-  *
-  * @mablParam: elementSelector - A CSS selector for the element
-  *
-  * @mablReturn: 'true' if the element disappeared within the timeout,
-  *              'false' otherwise
-  *
-  */
-async function mablJavaScriptStep(mablInputs, callback) {
+* TITLE: Wait until the provided element is no longer present, testing every 100 ms
+* @mablParam: elementSelector - A CSS selector for the element
+*
+* @mablReturn: 'true' if the element disappeared within the timeout, 'false' otherwise
+*/
+async function mablJavaScriptStep(mablInputs, callback, elementSelector = 'replaceMe!', TIMEOUT_SEC = '15') {
+
     const TIME_BETWEEN_MS = 100;
-    const TIMEOUT_SEC = 15;
     const MAX_RETRIES = TIMEOUT_SEC * 1000 / TIME_BETWEEN_MS;
 
-    // This loop will wait maximum 15 seconds for the provided CSS selector to
+    // This loop will wait until the maximum time for the provided CSS selector to
     // disappear from the DOM.
     for (let i = 0; i < MAX_RETRIES; i++) {
-        if (document.querySelector(mablInputs.variables.user.elementSelector) === null) {
+        if (document.querySelector(elementSelector) === null) {
             callback(true);
             break;
         } else {

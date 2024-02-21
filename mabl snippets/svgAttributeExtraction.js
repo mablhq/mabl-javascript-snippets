@@ -5,10 +5,11 @@
  *                   variables (mablInputs.variables.user)
  * @param {function} callback - The callback function
  */
-function mablJavaScriptStep(mablInputs, callback) {
+function mablJavaScriptStep(mablInputs, callback, CssSelector = '.element') {
 
+    // Rework to make sure element is actually there
     // Can be used to target a div element by class name, id, etc. Replace element with your desired element.
-    const element = document.querySelector('.element');
+    const element = document.querySelector(CssSelector);
 
     // check to see if the element exists before interaction
     if (!element) {

@@ -3,7 +3,7 @@
  * https://www.w3schools.com/jsref/met_console_log.asp
  * The console logs can be seen in either the Local Run Output or, in a cloud run, under mabl activity
  */
-function mablJavaScriptStep(mablInputs, callback, string1 = '{{@user.string1}}', string2 = '{{@user.string2}}') {
+function mablJavaScriptStep(mablInputs, callback, string1 = 'Hello World') {
 
     console.log("Example of logging!");
 

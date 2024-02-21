@@ -5,9 +5,7 @@
  * warn(msg)
  * warn(msg, subst1, …, substN)
  */
-
 function mablJavaScriptStep(mablInputs, callback) {
-
     console.warn("Attempt to generate a warning");
     callback("finished");
 }

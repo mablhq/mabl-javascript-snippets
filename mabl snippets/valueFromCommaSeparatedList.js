@@ -9,31 +9,16 @@
  * @mablReturn: The value from the index in the list
  *
  */
-function mablJavaScriptStep(mablInputs, callback) {
-    // Get the value of the mabl variable "list"
-    let listString = mablInputs.variables.user.list;
-    // throw an error if no list was provided
-    if (!listString) {
-        throw ("variable 'list' was not created before this Snippet was run.");
-    }
-    // Get the value of the mabl variable "index"
-    let recievedIndex = mablInputs.variables.user.index;
-    // Default the "index" to 0 if no index was provided
-    let index = recievedIndex ? parseInt(recievedIndex) - 1 : 0;
-    // throw an error if the index provided was less then 1
-    if (index < 0) {
-        throw ("The index provided needs to be 1 or more.");
-    }
+function mablJavaScriptStep(mablInputs, callback, index = '1', listString = '1,2,3,4') {
 
-    // Split the list it into multiple values
+    // Split the list into multiple values
     let listArray = listString.split(",");
     // Get the correct value from the list at the desired index
     let returnValue = listArray[index];
 
     // Log the index and the value returned
-    console.log(
-        "Returned value from index " + recievedIndex + ": " + returnValue
-    );
+    console.log("Returned value from index " + index + ": " + returnValue);
     // Return the desired value
+    // For the default values, list = 1,2,3,4 and index = 1, it will return 2
     callback(returnValue);
 }

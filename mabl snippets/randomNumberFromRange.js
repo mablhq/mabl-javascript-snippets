@@ -5,6 +5,4 @@
  */
 function mablJavaScriptStep(mablInputs, callback, count = 'numberOfElements') {
     callback(Math.floor(Math.random() * count + 1));
-)
-
 }

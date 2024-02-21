@@ -1,5 +1,7 @@
 /**
  * Get the value of a cookie you know the name of
+ * mabl has built in ways to manipulate cookies:
+ * https://help.mabl.com/docs/working-with-cookie-assertions
  */
 function mablJavaScriptStep(mablInputs, callback, cookieName = 'myCookie') {
 

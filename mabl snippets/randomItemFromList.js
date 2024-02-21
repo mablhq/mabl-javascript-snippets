@@ -6,9 +6,7 @@ function mablJavaScriptStep(mablInputs, callback, itemList = '["12345", "54321",
 // Convert input into a JSON array
     let parsedList = JSON.parse(itemList);
 
-// Randomly pick one of the numbers in the array
-    const result = () => {
-        return numList[Math.floor(Math.random() * parsedList.length)];
-    }
-    callback(result());
+// Randomly pick one of the items in the array
+    const result = parsedList[Math.floor(Math.random() * parsedList.length)];
+    callback(result);
 }
