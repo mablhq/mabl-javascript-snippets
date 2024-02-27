@@ -16,55 +16,55 @@
  */
 function mablJavaScriptStep(mablInputs, callback) {
 
-  // <CONFIGS>
+    // <CONFIGS>
 //  // Replace the below with these lines to load from an environment variable
 //  var twilioAccountSid = mablInputs.variables.user.twilioAccountSid;
 //  var twilioAccountAuthToken = mablInputs.variables.user.twilioAccountAuthToken;
 
-  // Add Twilio API creds as username: Account SID, password: auth token, add to the plan
-  var twilioAccountSid = mablInputs.variables.web.defaults.credentials.username;
-  var twilioAccountAuthToken = mablInputs.variables.web.defaults.credentials.password;
+    // Add Twilio API creds as username: Account SID, password: auth token, add to the plan
+    var twilioAccountSid = mablInputs.variables.web.defaults.credentials.username;
+    var twilioAccountAuthToken = mablInputs.variables.web.defaults.credentials.password;
 
-  var toNumberFilter = undefined; // e.g. "+16177415396"; // add a phone number here, to filter the number
-  // </CONFIGS>
+    var toNumberFilter = undefined; // e.g. "+16177415396"; // add a phone number here, to filter the number
+    // </CONFIGS>
 
-  var url = 'https://api.twilio.com/2010-04-01/Accounts/' + twilioAccountSid + '/Messages.json';
+    var url = 'https://api.twilio.com/2010-04-01/Accounts/' + twilioAccountSid + '/Messages.json';
 
-  function responseListener(event) {
-    var results = JSON.parse(this.responseText);
-    if (results.messages && results.messages.length > 0) {
-      var lastMessage = results.messages.filter(function (message) {
-        if (toNumberFilter) {
-          return message.to === toNumberFilter;
+    function responseListener(event) {
+        var results = JSON.parse(this.responseText);
+        if (results.messages && results.messages.length > 0) {
+            var lastMessage = results.messages.filter(function (message) {
+                if (toNumberFilter) {
+                    return message.to === toNumberFilter;
+                }
+                return true; // no number filtering
+            })[0];
+
+            if (lastMessage) {
+                return callback(lastMessage.body);
+            }
+            throw new Error('No messages matched number: ' + toNumberFilter);
+        } else {
+            throw new Error('No messages found');
         }
-        return true; // no number filtering
-      })[0];
-
-      if (lastMessage) {
-        return callback(lastMessage.body);
-      }
-      throw new Error('No messages matched number: ' + toNumberFilter);
-    } else {
-      throw new Error('No messages found');
     }
-  }
 
-  function failureHandler(event) {
-    console.error('error');
-    throw new Error('Request error: ' + event.message);
-  }
+    function failureHandler(event) {
+        console.error('error');
+        throw new Error('Request error: ' + event.message);
+    }
 
-  function abortHandler(event) {
-    console.error('aborted');
-    throw new Error('Request aborted: ' + event.message);
-  }
+    function abortHandler(event) {
+        console.error('aborted');
+        throw new Error('Request aborted: ' + event.message);
+    }
 
-  var request = new XMLHttpRequest();
-  var authHeader = 'Basic ' + btoa(twilioAccountSid + ':' + twilioAccountAuthToken);
-  request.addEventListener('load', responseListener);
-  request.addEventListener('error', failureHandler);
-  request.addEventListener('abort', abortHandler);
-  request.open('GET', url);
-  request.setRequestHeader('Authorization', authHeader);
-  request.send();
+    var request = new XMLHttpRequest();
+    var authHeader = 'Basic ' + btoa(twilioAccountSid + ':' + twilioAccountAuthToken);
+    request.addEventListener('load', responseListener);
+    request.addEventListener('error', failureHandler);
+    request.addEventListener('abort', abortHandler);
+    request.open('GET', url);
+    request.setRequestHeader('Authorization', authHeader);
+    request.send();
 }
