@@ -1,15 +1,30 @@
 # mabl Javascript Snippets
 
- This repository functions as the site where users can view and take JavaScript examples that can be used in their own mabl testing. Users can also contribute to this repository with an example of their own JavaScript code they used in mabl trainer.
- 
- ## mabl snippets
- 
-The examples included in the mabl snippets are examples of special circumstances or advanced features that would be useful to anyone using mabl to automate their testing. These snippets will be updated if the mabl support team notices a pattern of interest in particular JavaScript functionalities that are not yet included in this folder.
- 
- ## user snippets
- 
- The snippets in this folder are customer submitted examples of JavaScript code that they have used in their own testing that may be useful to other customers. You can find more information regarding user snippets [here](https://github.com/EdgarJoelM/mabl-JavaScript-snippets/blob/master/user%20snippets/README.md).
- 
- ## user resources
- 
-  If you're unfamiliar with the Javascript and wish to learn how it works or just need a reference the [Mozilla Developer Docs](https://www.w3schools.com/jsref/default.asp) or [w3Schools](https://www.w3schools.com/jsref/default.asp)
+This repository functions as the site where users can view and take JavaScript examples that can be used in their own mabl browser and mobile testing.
+
+## mabl snippets
+
+The examples included in the mabl snippets are examples of different ways one can utilize javascript to create custom steps that would be useful to anyone using mabl to automate their Browser and/or Native Mobile testing. The example snippets here are updated periodically when we find examples that are potentially useful for our users.
+
+## helpful functions
+
+These are examples of functions that can be used within your snippets to solve certain problems.
+
+### Example Usage:
+
+Here is an example of using the browser testing function `removeAccentsFromString` create a parameterized snippet that can take a string and remove its accents.
+
+The example below can remove the accents from "Français" to get "Francais"
+
+```javascript
+function mablJavaScriptStep(mablInputs, callback, accentedText = undefined) {
+  callback(removeAccentsFromString(accentedText));
+}
+
+// Example mabl function usage:
+function removeAccentsFromString(text) {
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+```
+
+Note: The added function can be placed below the `mablJavaScriptStep` function so you can focus on keeping your snippet steps logic in that main function.
