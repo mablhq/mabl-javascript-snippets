@@ -5,7 +5,7 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Create the xpath to find the element by text
     const xpath = `//*[@text="${elementText}" or @content-desc="${elementText}" or @label="${elementText}"]`;
     // Find the element by xpath
-    const target = await driver.findElement("xpath", elementXpath);
+    const target = await driver.findElement("xpath", xpath);
     // Tap on the element
     await target.click();
     // Return a success message
