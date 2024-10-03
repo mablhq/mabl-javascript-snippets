@@ -3,7 +3,7 @@ function mablJavaScriptStep(mablInputs, callback, element_xpath = undefined) {
     // Get the Appium driver
     const driver = await mabl.mobile.getDriver();
     // Find the element by xpath
-    const target = await driver.findElement("xpath", element_xpath);
+    const target = await driver.findElement("xpath", element_xpath).click();
     // Get the text of the element
     return await target.getText();
   }

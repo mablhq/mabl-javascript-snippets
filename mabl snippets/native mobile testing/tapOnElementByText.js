@@ -1,4 +1,4 @@
-function mablJavaScriptStep(mablInputs, callback) {
+function mablJavaScriptStep(mablInputs, callback, elementText = undefined) {
   async function callAppium() {
     // Get the Appium driver
     const driver = await mabl.mobile.getDriver();
