@@ -470,7 +470,7 @@ class MultiTouch {
   dragAndDrop(
     startLocation,
     endLocation,
-    holdDuration = 1000,
+    holdDuration = 2500,
     dragDuration = 1000
   ) {
     for (let i = 0; i < this.fingerCount; i++) {
