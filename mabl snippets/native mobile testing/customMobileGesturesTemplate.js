@@ -464,8 +464,8 @@ class MultiTouch {
    * Drag and drop from the start to end coordinates.
    * @param startLocation The start x,y location of the drag.
    * @param endLocation The end x,y location of the drag.
-   * @param holdDuration The duration of the hold in milliseconds. Default is 1000.
-   * @param dragDuration The duration of the drag in milliseconds. Default is 2000.
+   * @param holdDuration The duration of the hold in milliseconds. Default is 2500.
+   * @param dragDuration The duration of the drag in milliseconds. Default is 1000.
    */
   dragAndDrop(
     startLocation,
