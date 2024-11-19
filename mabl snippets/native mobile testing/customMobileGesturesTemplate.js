@@ -276,11 +276,6 @@ class Locations {
 // ####### Element Class Definition #######
 // ########################################
 
-/**
- * The MobileElement class allows for finding and getting information about elements on a mobile device.
- * If no xpath is provided, the element will default to the entire screen.
- *
- */
 class MobileElement {
   constructor() {
     this.width;
@@ -644,6 +639,7 @@ class MultiTouch {
 // ########################################
 // ### Gesture Class Definition ####
 // ########################################
+
 class Gesture {
   constructor() {
     this.steps = [];
