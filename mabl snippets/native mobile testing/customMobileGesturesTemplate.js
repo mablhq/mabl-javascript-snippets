@@ -5,7 +5,7 @@ function mablJavaScriptStep(mablInputs, callback) {
     // Define the custom gestures here
     // Example: 2 finger swipe up from the bottom center of the screen to the top center
     await new MultiTouch(2)
-      .scroll(screen.bottomThirdCenter, screen.topThirdCenter)
+      .swipe(screen.bottomCenter, screen.topCenter)
       .perform();
   }
 
@@ -53,46 +53,45 @@ function mablJavaScriptStep(mablInputs, callback) {
  ## General Usage:
 
   1. Create a new element object.
-    `const element = new MobileElement();`                //=> Create a new element object
+    `const element = new MobileElement();`         //=> Create a new element object
 
   2. Find the element or get screen information.
     `await element.findByExactText(elementText)`   //=> Find the element by exact text
     `await element.findByPartialText(elementText)` //=> Find the element by partial text
-    `await element.findByXpath(xpath)`                    //=> Find the element by xpath
-    `await element.getScreenInfo()`                       //=> Get the entire screen information
+    `await element.findByXpath(xpath)`             //=> Find the element by xpath
+    `await element.getScreenInfo()`                //=> Get the entire screen information
 
   ### Note: These can be combined into one step:
     `const element = await new MobileElement().findByExactText(elementText);`
 
   3. Use the element locations (example of an element with a height of 200 and width of 200):
-    `element.center`                                      //=> {100, 100} center of the element
-    `element.topLeftCorner`                               //=> {0, 0} top left corner of the element
-    `element.topRightCorner`                              //=> {200, 0} top right corner of the element
-    `element.bottomRightCorner`                           //=> {200, 200} bottom right corner of the element
-    `element.bottomLeftCorner`                            //=> {0, 200} bottom left corner of the element
-    `element.topThirdCenter`                        //=> {100, 50} top middle third center of the element
-    `element.bottomThirdCenter`                     //=> {100, 150} bottom middle third center of the element
-    `element.leftThirdCenter`                             //=> {50, 100} middle left third center of the element
-    `element.rightThirdCenter`                            //=> {150, 100} middle right third center of the element
-    `element.topLeftThirdCenter`                          //=> {50, 50} top left third center of the element
-    `element.topRightThirdCenter`                         //=> {150, 50} top right third center of the element
-    `element.bottomLeftThirdCenter`                       //=> {50, 150} bottom left third center of the element
-    `element.bottomRightThirdCenter`                      //=> {150, 150} bottom right third center of the element
-    `element.percentLocation(10, 20)`                     //=> {20, 40} 10% of the width and 20% of the height
-    `element.width`                                       //=> 200 width of the element
-    `element.height`                                      //=> 200 height of the element
-
-  ### Note: The attributes with `ThirdCenter` are the centers of each area of the element when divided into thirds vertically and horizontally.
+  ### Note: The attributes with `Center` are the intersections created from dividing the element into 4x4 grid.
+    
     Grid View:
+    A---+---+---+---B
+    |   |   |   |   |
+    |---1---2---3---|
+    |   |   |   |   |
+    |---4---5---6---|
+    |   |   |   |   |
+    |---7---8---9---|
+    |   |   |   |   |
+    C---+---+---+---D
 
-    +------------------+------------------+------------------+
-    | topLeftThird     | topThird   | topRightThird    |
-    +------------------+------------------+------------------+
-    | leftThird        | center           | rightThird       |
-    +------------------+------------------+------------------+
-    | bottomLeftThird  | bottomThird| bottomRightThird |
-    +------------------+------------------+------------------+
+    A: `element.topLeftCorner`      //=> {0, 0}
+    B: `element.topRightCorner`     //=> {200, 0}
+    C: `element.bottomLeftCorner`   //=> {0, 200}
+    D: `element.bottomRightCorner`  //=> {200, 200}
 
+    1. `element.topLeftCenter`      //=> {50, 50}
+    2. `element.topCenter`          //=> {100, 50}
+    3. `element.topRightCenter`     //=> {150, 50}
+    4. `element.leftCenter`         //=> {50, 100}
+    5. `element.center`             //=> {100, 100}
+    6. `element.rightCenter`        //=> {150, 100}
+    7. `element.bottomLeftCenter`   //=> {50, 150}
+    8. `element.bottomCenter`       //=> {100, 150}
+    9. `element.bottomRightCenter`  //=> {150, 150}
 
  ## `offsetLocation` Helper Function:
   - offsetLocation(location, x, y) - Modify the location by adding x and y values.
@@ -148,11 +147,11 @@ function mablJavaScriptStep(mablInputs, callback) {
   await new MultiTouch().dragAndDrop(dragElement.center, dropElement.center).perform();
 
  ## 4 finger swipe up from the bottom center of the screen to the top center
-  await new MultiTouch(4).swipe(screen.center, screen.topThirdCenter).perform();
+  await new MultiTouch(4).swipe(screen.center, screen.topCenter).perform();
 
  ## 3 finger curved swipe from the bottom left center to the top right center through the top left corner
   await new MultiTouch(3)
-    .curvedSwipe(screen.bottomLeftThirdCenter,screen.topRightThirdCenter,screen.rightThirdCenter)
+    .curvedSwipe(screen.bottomLeftCenter,screen.topRightCenter,screen.rightCenter)
     .perform();
 
  ## iOS Zoom in and out on first Photo
@@ -199,45 +198,63 @@ class Locations {
     this.bottomRightCorner = this.offset({ x: this.width, y: this.height });
     this.bottomLeftCorner = this.offset({ x: 0, y: this.height });
     /*
-     * Centers of each area of the element when divided into thirds vertically and horizontally
-     * +------------------+------------------+------------------+
-     * | topLeftThird     | topThird         | topRightThird    |
-     * +------------------+------------------+------------------+
-     * | leftThird        | center           | rightThird       |
-     * +------------------+------------------+------------------+
-     * | bottomLeftThird  | bottomThird      | bottomRightThird |
-     * +------------------+------------------+------------------+
+     * The attributes below with `Center` are the intersections created from dividing the element into 4x4 grid.
+     *      Grid View:
+     * A---+---+---+---B
+     * |   |   |   |   |
+     * |---1---2---3---|
+     * |   |   |   |   |
+     * |---4---5---6---|
+     * |   |   |   |   |
+     * |---7---8---9---|
+     * |   |   |   |   |
+     * C---+---+---+---D
+     *
+     * A: topLeftCorner
+     * B: topRightCorner
+     * C: bottomLeftCorner
+     * D: bottomRightCorner
+     *
+     * 1: topLeftCenter
+     * 2: topCenter
+     * 3: topRightCenter
+     * 4: leftCenter
+     * 5: center
+     * 6: rightCenter
+     * 7: bottomLeftCenter
+     * 8: bottomCenter
+     * 9: bottomRightCenter
      */
-    this.topLeftThirdCenter = this.offset({
+    this.topLeftCenter = this.offset({
       x: this.width * 0.25,
       y: this.height * 0.25,
     });
-    this.topThirdCenter = this.offset({
+    this.topCenter = this.offset({
       x: this.width / 2,
       y: this.height * 0.25,
     });
-    this.topRightThirdCenter = this.offset({
+    this.topRightCenter = this.offset({
       x: this.width * 0.75,
       y: this.height * 0.25,
     });
-    this.leftThirdCenter = this.offset({
+    this.leftCenter = this.offset({
       x: this.width * 0.25,
       y: this.height / 2,
     });
     this.center = this.offset({ x: this.width / 2, y: this.height / 2 });
-    this.rightThirdCenter = this.offset({
+    this.rightCenter = this.offset({
       x: this.width * 0.75,
       y: this.height / 2,
     });
-    this.bottomLeftThirdCenter = this.offset({
+    this.bottomLeftCenter = this.offset({
       x: this.width * 0.25,
       y: this.height * 0.75,
     });
-    this.bottomThirdCenter = this.offset({
+    this.bottomCenter = this.offset({
       x: this.width / 2,
       y: this.height * 0.75,
     });
-    this.bottomRightThirdCenter = this.offset({
+    this.bottomRightCenter = this.offset({
       x: this.width * 0.75,
       y: this.height * 0.75,
     });
@@ -286,15 +303,15 @@ class MobileElement {
     this.bottomRightCorner;
     this.bottomLeftCorner;
     // Centers of 3x3 grid
-    this.topLeftThirdCenter;
-    this.topThirdCenter;
-    this.topRightThirdCenter;
-    this.leftThirdCenter;
+    this.topLeftCenter;
+    this.topCenter;
+    this.topRightCenter;
+    this.leftCenter;
     this.center;
-    this.rightThirdCenter;
-    this.bottomLeftThirdCenter;
-    this.bottomThirdCenter;
-    this.bottomRightThirdCenter;
+    this.rightCenter;
+    this.bottomLeftCenter;
+    this.bottomCenter;
+    this.bottomRightCenter;
   }
 
   /**
@@ -350,15 +367,15 @@ class MobileElement {
     this.bottomRightCorner = locations.bottomRightCorner;
     this.bottomLeftCorner = locations.bottomLeftCorner;
     // Centers of 3x3 grid
-    this.topLeftThirdCenter = locations.topLeftThirdCenter;
-    this.topThirdCenter = locations.topThirdCenter;
-    this.topRightThirdCenter = locations.topRightThirdCenter;
-    this.leftThirdCenter = locations.leftThirdCenter;
+    this.topLeftCenter = locations.topLeftCenter;
+    this.topCenter = locations.topCenter;
+    this.topRightCenter = locations.topRightCenter;
+    this.leftCenter = locations.leftCenter;
     this.center = locations.center;
-    this.rightThirdCenter = locations.rightThirdCenter;
-    this.bottomLeftThirdCenter = locations.bottomLeftThirdCenter;
-    this.bottomThirdCenter = locations.bottomThirdCenter;
-    this.bottomRightThirdCenter = locations.bottomRightThirdCenter;
+    this.rightCenter = locations.rightCenter;
+    this.bottomLeftCenter = locations.bottomLeftCenter;
+    this.bottomCenter = locations.bottomCenter;
+    this.bottomRightCenter = locations.bottomRightCenter;
     return this;
   }
 }
@@ -431,7 +448,7 @@ class MultiTouch {
     const taps = [];
     for (let i = 0; i < this.fingerCount; i++) {
       const tapLocation = this.fingerSpread(location, this.fingerCount, i);
-      const tap = new Gesture().move(tapLocation).press().release();
+      const tap = new Gesture().move(tapLocation).press().pause(100).release();
       this.touches.push(tap.steps);
     }
     return this;
@@ -504,7 +521,7 @@ class MultiTouch {
       const swipe = new Gesture()
         .move(start)
         .press()
-        .pause(1000)
+        .pause(100)
         .move(end, swipeDuration)
         .release();
       this.touches.push(swipe.steps);
@@ -525,7 +542,7 @@ class MultiTouch {
     endLocation,
     controlLocation,
     steps = 20,
-    stepDuration = 100
+    stepDuration = 1000
   ) {
     for (let i = 0; i < this.fingerCount; i++) {
       const start = this.fingerSpread(startLocation, this.fingerCount, i);
@@ -533,8 +550,7 @@ class MultiTouch {
       const control = this.fingerSpread(controlLocation, this.fingerCount, i);
 
       // Generate touch actions based on a calculated set of points along the curve
-      const curvedTouch = new Gesture();
-      curvedTouch.move(start).press().pause(stepDuration);
+      const curvedTouch = new Gesture().move(start).press().pause(100);
 
       // Calculate points along the quadratic bezier curve
       for (let t = 0; t <= 1; t += 1 / steps) {
@@ -547,7 +563,10 @@ class MultiTouch {
           2 * (1 - t) * t * control.y +
           t * t * end.y;
 
-        curvedTouch.move({ x, y });
+        curvedTouch.move(
+          { x: Math.floor(x), y: Math.floor(y) },
+          stepDuration / steps
+        );
       }
 
       curvedTouch.move(end).release();
@@ -637,7 +656,7 @@ class MultiTouch {
 }
 
 // ########################################
-// ### Gesture Class Definition ####
+// ###### Gesture Class Definition ########
 // ########################################
 
 class Gesture {
@@ -672,10 +691,10 @@ class Gesture {
 
   /**
    * Pause for the given duration.
-   * @param duration The duration of the pause in milliseconds.
+   * @param duration The duration of the pause in milliseconds. Default is 1000.
    * @returns The gesture object to chain methods.
    */
-  pause(duration) {
+  pause(duration = 1000) {
     this.steps.push({ type: "pause", duration });
     return this;
   }
@@ -686,15 +705,6 @@ class Gesture {
    */
   release() {
     this.steps.push({ type: "pointerUp", button: 0 });
-    return this;
-  }
-
-  /**
-   * Tap at the current location.
-   * @returns The gesture object to chain methods.
-   */
-  tap() {
-    this.press().release();
     return this;
   }
 
