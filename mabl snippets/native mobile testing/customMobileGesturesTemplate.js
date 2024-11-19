@@ -541,10 +541,13 @@ class MultiTouch {
     startLocation,
     endLocation,
     controlLocation,
-    steps = 20,
-    stepDuration = 1000
+    steps = 15,
+    stepDuration = 2000
   ) {
     for (let i = 0; i < this.fingerCount; i++) {
+      // Step counts above 15 can cause issues and error out
+      steps = steps > 15 ? 15 : steps;
+
       const start = this.fingerSpread(startLocation, this.fingerCount, i);
       const end = this.fingerSpread(endLocation, this.fingerCount, i);
       const control = this.fingerSpread(controlLocation, this.fingerCount, i);
@@ -563,10 +566,7 @@ class MultiTouch {
           2 * (1 - t) * t * control.y +
           t * t * end.y;
 
-        curvedTouch.move(
-          { x: Math.floor(x), y: Math.floor(y) },
-          stepDuration / steps
-        );
+        curvedTouch.move({ x, y }, stepDuration / steps);
       }
 
       curvedTouch.move(end).release();
