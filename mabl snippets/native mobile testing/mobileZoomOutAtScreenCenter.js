@@ -1,6 +1,8 @@
+// This was created using the customMobileGestureSnippet.js snippet that also lives in this repo.
+
 function mablJavaScriptStep(mablInputs, callback) {
   async function callAppium() {
-    const screen = await new MobileElement().getScreenInfo();
+    const screen = await new MobileElement().getScreenLocations();
     await new MultiTouch().zoomOut(screen.center).perform();
   }
 
@@ -48,46 +50,52 @@ function mablJavaScriptStep(mablInputs, callback) {
  ## General Usage:
 
   1. Create a new element object.
-    `const element = new MobileElement();`                //=> Create a new element object
+    `const element = new MobileElement();`         //=> Create a new element object
 
-  2. Find the element or get screen information.
+  2. Find the element or just get the screen location and be done.
     `await element.findByExactText(elementText)`   //=> Find the element by exact text
     `await element.findByPartialText(elementText)` //=> Find the element by partial text
-    `await element.findByXpath(xpath)`                    //=> Find the element by xpath
-    `await element.getScreenInfo()`                       //=> Get the entire screen information
+    `await element.findByXpath(xpath)`             //=> Find the element by xpath
+
+    `await element.getScreenLocations()`           //=> Get the screen locations
 
   ### Note: These can be combined into one step:
     `const element = await new MobileElement().findByExactText(elementText);`
 
-  3. Use the element locations (example of an element with a height of 200 and width of 200):
-    `element.center`                                      //=> {100, 100} center of the element
-    `element.topLeftCorner`                               //=> {0, 0} top left corner of the element
-    `element.topRightCorner`                              //=> {200, 0} top right corner of the element
-    `element.bottomRightCorner`                           //=> {200, 200} bottom right corner of the element
-    `element.bottomLeftCorner`                            //=> {0, 200} bottom left corner of the element
-    `element.topThirdCenter`                        //=> {100, 50} top middle third center of the element
-    `element.bottomThirdCenter`                     //=> {100, 150} bottom middle third center of the element
-    `element.leftThirdCenter`                             //=> {50, 100} middle left third center of the element
-    `element.rightThirdCenter`                            //=> {150, 100} middle right third center of the element
-    `element.topLeftThirdCenter`                          //=> {50, 50} top left third center of the element
-    `element.topRightThirdCenter`                         //=> {150, 50} top right third center of the element
-    `element.bottomLeftThirdCenter`                       //=> {50, 150} bottom left third center of the element
-    `element.bottomRightThirdCenter`                      //=> {150, 150} bottom right third center of the element
-    `element.percentLocation(10, 20)`                     //=> {20, 40} 10% of the width and 20% of the height
-    `element.width`                                       //=> 200 width of the element
-    `element.height`                                      //=> 200 height of the element
+  3. Wait for the element to be present or not present.
+    `await element.waitUntilPresent(timeout);` //=> Wait until the element is present
+    `await element.waitUntilHidden(timeout);`  //=> Wait until the element is hidden
 
-  ### Note: The attributes with `ThirdCenter` are the centers of each area of the element when divided into thirds vertically and horizontally.
+  4. Use the element locations. (example of an element with a height of 200 and width of 200):
+
     Grid View:
+    A---+---+---+---B
+    |   |   |   |   |
+    |---1---2---3---|
+    |   |   |   |   |
+    |---4---5---6---|
+    |   |   |   |   |
+    |---7---8---9---|
+    |   |   |   |   |
+    C---+---+---+---D
 
-    +------------------+------------------+------------------+
-    | topLeftThird     | topThird   | topRightThird    |
-    +------------------+------------------+------------------+
-    | leftThird        | center           | rightThird       |
-    +------------------+------------------+------------------+
-    | bottomLeftThird  | bottomThird| bottomRightThird |
-    +------------------+------------------+------------------+
+    A: `element.topLeftCorner`     //=> {0, 0}
+    B: `element.topRightCorner`    //=> {200, 0}
+    C: `element.bottomLeftCorner`  //=> {0, 200}
+    D: `element.bottomRightCorner` //=> {200, 200}
+    
+    1. `element.topLeft`           //=> {50, 50}
+    2. `element.topCenter`         //=> {100, 50}
+    3. `element.topRight`          //=> {150, 50}
+    4. `element.leftCenter`        //=> {50, 100}
+    5. `element.center`            //=> {100, 100}
+    6. `element.rightCenter`       //=> {150, 100}
+    7. `element.bottomLeft`        //=> {50, 150}
+    8. `element.bottomCenter`      //=> {100, 150}
+    9. `element.bottomRight`       //=> {150, 150}
 
+    There is also the option to create a percent location:
+    `element.percentLocation(0.5, 0.5)` //=> {100, 100}
 
  ## `offsetLocation` Helper Function:
   - offsetLocation(location, x, y) - Modify the location by adding x and y values.
@@ -106,7 +114,7 @@ function mablJavaScriptStep(mablInputs, callback) {
   The MultiTouch class allows for defining and performing custom gestures on a mobile device.
 
  ## General Usage:
-  1. Create a new gesture object.
+  1. Create a new MultiTouch object.
     `const gesture = new MultiTouch();`
 
   2. Define the gesture actions.
@@ -129,31 +137,39 @@ function mablJavaScriptStep(mablInputs, callback) {
 
 # Example Usage:
   ### Note: Many of these examples use `screen` which is defined here once as well as the beginning of the script.
-  const screen = await new MobileElement().getScreenInfo();
+  const screen = await new MobileElement().getScreenLocations();
 
  ## Zoom in at the center of the screen
   await new MultiTouch().zoomIn(screen.center).perform();
 
- ## Zoom out at the center of the screen
-  await new MultiTouch().zoomOut(screen.center).perform();
+ ## Zoom out at a custom location (10% from the left and 90% from the top)
+  await new MultiTouch().zoomOut(screen.percentLocation(0.1, 0.9)).perform();
 
  ## Drag and drop from the element with the text "Drag me" to the element with the text "Drop here"
   const dragElement = new MobileElement().findByExactText("Drag me");
   const dropElement = new MobileElement().findByExactText("Drop here");
+
+  await dragElement.waitUntilPresent();
+  await dropElement.waitUntilPresent();
   await new MultiTouch().dragAndDrop(dragElement.center, dropElement.center).perform();
 
  ## 4 finger swipe up from the bottom center of the screen to the top center
-  await new MultiTouch(4).swipe(screen.center, screen.topThirdCenter).perform();
+  await new MultiTouch(4).swipe(screen.center, screen.topCenter).perform();
 
  ## 3 finger curved swipe from the bottom left center to the top right center through the top left corner
   await new MultiTouch(3)
-    .curvedSwipe(screen.bottomLeftThirdCenter,screen.topRightThirdCenter,screen.rightThirdCenter)
+    .curvedSwipe(
+      screen.bottomLeft,
+      screen.topRight,
+      screen.rightCenter
+    )
     .perform();
 
- ## iOS Zoom in and out on first Photo
-  const image = await new MobileElement().findByXpath("//XCUIElementTypeImage");
-  await new MultiTouch().zoomIn(image.center).perform();
-  await new MultiTouch().zoomOut(image.center).perform();
+ ## One vertical swipe and one horizontal swipe at the same time
+  await new MultiTouch()
+    .swipe(screen.bottomRight, screen.topRight)
+    .swipe(screen.bottomLeft, screen.bottomRight)
+    .perform();
 
  ## 5 second longPress with 4 fingers at the center of the screen
   await new MultiTouch(4).longPress(screen.center, 5000).perform();
@@ -193,62 +209,40 @@ class Locations {
     this.topRightCorner = this.offset({ x: this.width, y: 0 });
     this.bottomRightCorner = this.offset({ x: this.width, y: this.height });
     this.bottomLeftCorner = this.offset({ x: 0, y: this.height });
-    /*
-     * Centers of each area of the element when divided into thirds vertically and horizontally
-     * +------------------+------------------+------------------+
-     * | topLeftThird     | topThird         | topRightThird    |
-     * +------------------+------------------+------------------+
-     * | leftThird        | center           | rightThird       |
-     * +------------------+------------------+------------------+
-     * | bottomLeftThird  | bottomThird      | bottomRightThird |
-     * +------------------+------------------+------------------+
-     */
-    this.topLeftThirdCenter = this.offset({
+    // Default locations
+    this.topLeft = this.offset({
       x: this.width * 0.25,
       y: this.height * 0.25,
     });
-    this.topThirdCenter = this.offset({
+    this.topCenter = this.offset({
       x: this.width / 2,
       y: this.height * 0.25,
     });
-    this.topRightThirdCenter = this.offset({
+    this.topRight = this.offset({
       x: this.width * 0.75,
       y: this.height * 0.25,
     });
-    this.leftThirdCenter = this.offset({
+    this.leftCenter = this.offset({
       x: this.width * 0.25,
       y: this.height / 2,
     });
     this.center = this.offset({ x: this.width / 2, y: this.height / 2 });
-    this.rightThirdCenter = this.offset({
+    this.rightCenter = this.offset({
       x: this.width * 0.75,
       y: this.height / 2,
     });
-    this.bottomLeftThirdCenter = this.offset({
+    this.bottomLeft = this.offset({
       x: this.width * 0.25,
       y: this.height * 0.75,
     });
-    this.bottomThirdCenter = this.offset({
+    this.bottomCenter = this.offset({
       x: this.width / 2,
       y: this.height * 0.75,
     });
-    this.bottomRightThirdCenter = this.offset({
+    this.bottomRight = this.offset({
       x: this.width * 0.75,
       y: this.height * 0.75,
     });
-  }
-
-  /**
-   * Calculate the location based on a percentage of the width and height.
-   * @param {number} xPercent - The percentage of the width.
-   * @param {number} yPercent - The percentage of the height.
-   * @returns {x, y} - The calculated location.
-   */
-  percentLocation(xPercent, yPercent) {
-    return {
-      x: this.width * xPercent,
-      y: this.height * yPercent,
-    };
   }
 
   /**
@@ -271,77 +265,134 @@ class Locations {
 // ####### Element Class Definition #######
 // ########################################
 
-/**
- * The MobileElement class allows for finding and getting information about elements on a mobile device.
- * If no xpath is provided, the element will default to the entire screen.
- *
- */
 class MobileElement {
-  constructor() {
-    this.width;
-    this.height;
-    // Corners
-    this.topLeftCorner;
-    this.topRightCorner;
-    this.bottomRightCorner;
-    this.bottomLeftCorner;
-    // Centers of 3x3 grid
-    this.topLeftThirdCenter;
-    this.topThirdCenter;
-    this.topRightThirdCenter;
-    this.leftThirdCenter;
-    this.center;
-    this.rightThirdCenter;
-    this.bottomLeftThirdCenter;
-    this.bottomThirdCenter;
-    this.bottomRightThirdCenter;
-  }
-
   /**
    * Sets the xpath to search for.
    * @param xpath The xpath to search for.
    */
-  async findByXpath(xpath) {
+  findByXpath(xpath) {
     this.xpath = xpath;
-    return await this.getLocations();
+    return this;
   }
 
   /**
    * Sets the xpath to search for an element by exact text.
    * @param elementText The exact match text to search for.
    */
-  async findByExactText(elementText) {
+  findByExactText(elementText) {
     this.xpath = `//*[@text="${elementText}" or @content-desc="${elementText}" or @label="${elementText}" or @value="${elementText}"]`;
-    return await this.getLocations();
+    return this;
   }
 
   /**
    * Sets the xpath to search for an element by partial text.
    * @param elementText The partial text to search for.
    */
-  async findByPartialText(elementText) {
+  findByPartialText(elementText) {
     this.xpath = `//*[contains(@text, "${elementText}") or contains(@content-desc, "${elementText}") or contains(@label, "${elementText}") or contains(@value, "${elementText}")]`;
+    return this;
+  }
+
+  /**
+   * Calculate the location based on a percentage of the width and height.
+   * @param {number} xPercent - The percentage of the width.
+   * @param {number} yPercent - The percentage of the height.
+   * @returns {x, y} - The calculated location.
+   */
+  percentLocation(xPercent, yPercent) {
+    xPercent = xPercent / 100;
+    yPercent = yPercent / 100;
+    return {
+      x: this.width * xPercent + this.topLeftCorner.x,
+      y: this.height * yPercent + this.topLeftCorner.y,
+    };
+  }
+
+  /**
+   * Sets  the screen location information on the object.
+   */
+  async getScreenLocations() {
+    this.xpath = undefined;
     return await this.getLocations();
   }
 
-  async getScreenInfo() {
-    this.xpath = undefined;
-    return await this.getLocations();
+  /**
+   * Checks if the element is present and sets the location information on the object if it is.
+   * @returns {boolean} - True if the element is present, false otherwise.
+   */
+  async elementIsPresent() {
+    const driver = await mabl.mobile.getDriver();
+    try {
+      this.element = await driver.findElement("xpath", this.xpath);
+      this.rect = await this.element.getRect();
+      await this.getLocations();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  /**
+   * Loop to wait until the element is present or hidden.
+   * @private
+   */
+  async waitUntilLoop() {
+    this.count++;
+    if ((await this.elementIsPresent()) === this.desiredPresenceState) {
+      clearInterval(this.interval);
+      this.resolve();
+    } else if (this.count >= this.timeout / 1000) {
+      clearInterval(this.interval);
+      const negative = this.desiredPresenceState ? "still" : "not";
+      this.reject(
+        `Element matching xpath: ${this.xpath} ${negative} found after ${this.timeout}ms`
+      );
+    }
+  }
+
+  /**
+   * Wait until the element is present.
+   * @param {number} timeout - The timeout in milliseconds.
+   */
+  waitUntilPresent(timeout = 15000) {
+    return new Promise((resolve, reject) => {
+      this.count = 0;
+      this.timeout = timeout;
+      this.desiredPresenceState = true;
+      this.resolve = resolve;
+      this.reject = reject;
+      this.interval = setInterval(this.waitUntilLoop.bind(this), 1000);
+    });
+  }
+
+  /**
+   * Wait until the element is hidden.
+   * @param {number} timeout - The timeout in milliseconds.
+   */
+  waitUntilHidden(timeout = 15000) {
+    return new Promise((resolve, reject) => {
+      this.count = 0;
+      this.timeout = timeout;
+      this.desiredPresenceState = false;
+      this.resolve = resolve;
+      this.reject = reject;
+      this.interval = setInterval(this.waitUntilLoop.bind(this), 1000);
+    });
   }
 
   /**
    * Finds element and sets the location information on the object
    */
   async getLocations() {
-    const driver = await mabl.mobile.getDriver();
-    let rect;
-    if (this.xpath) {
-      const element = await driver.findElement("xpath", this.xpath);
-      rect = await element.getRect();
-    } else {
-      rect = await driver.getWindowRect();
+    if (!this.xpath) {
+      const driver = await mabl.mobile.getDriver();
+      this.rect = await driver.getWindowRect();
+    } else if (!this.rect) {
+      const driver = await mabl.mobile.getDriver();
+      this.element = await driver.findElement("xpath", this.xpath);
+      this.rect = await this.element.getRect();
     }
-    const locations = new Locations(rect);
+    const locations = new Locations(this.rect);
     this.width = locations.width;
     this.height = locations.height;
     // Corners
@@ -349,16 +400,16 @@ class MobileElement {
     this.topRightCorner = locations.topRightCorner;
     this.bottomRightCorner = locations.bottomRightCorner;
     this.bottomLeftCorner = locations.bottomLeftCorner;
-    // Centers of 3x3 grid
-    this.topLeftThirdCenter = locations.topLeftThirdCenter;
-    this.topThirdCenter = locations.topThirdCenter;
-    this.topRightThirdCenter = locations.topRightThirdCenter;
-    this.leftThirdCenter = locations.leftThirdCenter;
+    // Default locations
+    this.topLeft = locations.topLeft;
+    this.topCenter = locations.topCenter;
+    this.topRight = locations.topRight;
+    this.leftCenter = locations.leftCenter;
     this.center = locations.center;
-    this.rightThirdCenter = locations.rightThirdCenter;
-    this.bottomLeftThirdCenter = locations.bottomLeftThirdCenter;
-    this.bottomThirdCenter = locations.bottomThirdCenter;
-    this.bottomRightThirdCenter = locations.bottomRightThirdCenter;
+    this.rightCenter = locations.rightCenter;
+    this.bottomLeft = locations.bottomLeft;
+    this.bottomCenter = locations.bottomCenter;
+    this.bottomRight = locations.bottomRight;
     return this;
   }
 }
@@ -431,7 +482,7 @@ class MultiTouch {
     const taps = [];
     for (let i = 0; i < this.fingerCount; i++) {
       const tapLocation = this.fingerSpread(location, this.fingerCount, i);
-      const tap = new Gesture().move(tapLocation).press().release();
+      const tap = new Gesture().move(tapLocation).press().pause(100).release();
       this.touches.push(tap.steps);
     }
     return this;
@@ -459,13 +510,13 @@ class MultiTouch {
    * Drag and drop from the start to end coordinates.
    * @param startLocation The start x,y location of the drag.
    * @param endLocation The end x,y location of the drag.
-   * @param holdDuration The duration of the hold in milliseconds. Default is 1000.
-   * @param dragDuration The duration of the drag in milliseconds. Default is 2000.
+   * @param holdDuration The duration of the hold in milliseconds. Default is 2500.
+   * @param dragDuration The duration of the drag in milliseconds. Default is 1000.
    */
   dragAndDrop(
     startLocation,
     endLocation,
-    holdDuration = 1000,
+    holdDuration = 2500,
     dragDuration = 1000
   ) {
     for (let i = 0; i < this.fingerCount; i++) {
@@ -504,7 +555,7 @@ class MultiTouch {
       const swipe = new Gesture()
         .move(start)
         .press()
-        .pause(1000)
+        .pause(100)
         .move(end, swipeDuration)
         .release();
       this.touches.push(swipe.steps);
@@ -524,17 +575,19 @@ class MultiTouch {
     startLocation,
     endLocation,
     controlLocation,
-    steps = 20,
-    stepDuration = 100
+    steps = 15,
+    stepDuration = 2000
   ) {
     for (let i = 0; i < this.fingerCount; i++) {
+      // Step counts above 15 can cause issues and error out
+      steps = steps > 15 ? 15 : steps;
+
       const start = this.fingerSpread(startLocation, this.fingerCount, i);
       const end = this.fingerSpread(endLocation, this.fingerCount, i);
       const control = this.fingerSpread(controlLocation, this.fingerCount, i);
 
       // Generate touch actions based on a calculated set of points along the curve
-      const curvedTouch = new Gesture();
-      curvedTouch.move(start).press().pause(stepDuration);
+      const curvedTouch = new Gesture().move(start).press().pause(100);
 
       // Calculate points along the quadratic bezier curve
       for (let t = 0; t <= 1; t += 1 / steps) {
@@ -547,7 +600,7 @@ class MultiTouch {
           2 * (1 - t) * t * control.y +
           t * t * end.y;
 
-        curvedTouch.move({ x, y });
+        curvedTouch.move({ x, y }, stepDuration / steps);
       }
 
       curvedTouch.move(end).release();
@@ -637,8 +690,9 @@ class MultiTouch {
 }
 
 // ########################################
-// ### Gesture Class Definition ####
+// ###### Gesture Class Definition ########
 // ########################################
+
 class Gesture {
   constructor() {
     this.steps = [];
@@ -671,10 +725,10 @@ class Gesture {
 
   /**
    * Pause for the given duration.
-   * @param duration The duration of the pause in milliseconds.
+   * @param duration The duration of the pause in milliseconds. Default is 1000.
    * @returns The gesture object to chain methods.
    */
-  pause(duration) {
+  pause(duration = 1000) {
     this.steps.push({ type: "pause", duration });
     return this;
   }
@@ -685,15 +739,6 @@ class Gesture {
    */
   release() {
     this.steps.push({ type: "pointerUp", button: 0 });
-    return this;
-  }
-
-  /**
-   * Tap at the current location.
-   * @returns The gesture object to chain methods.
-   */
-  tap() {
-    this.press().release();
     return this;
   }
 
